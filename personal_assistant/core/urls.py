@@ -19,7 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),  # Главный маршрут связан с accounts
+    path('accounts/', include('accounts.urls')),  # Главный маршрут связан с accounts
     # path('contacts/', include('contacts.urls')), # Комент убераем и работаем
     # path('notes/', include('notes.urls')),
     # path('files/', include('files.urls')),
