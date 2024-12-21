@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from personal_assistant.news import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),  # Главный маршрут связан с accounts
-    # path('contacts/', include('contacts.urls')), # Комент убераем и работаем
-    # path('notes/', include('notes.urls')),
-    # path('files/', include('files.urls')),
-    # path('news/', include('news.urls')),
+    path('', views.news_list, name='news_list'),  # главная страница, отображает новости
+    path('news/', views.news_list, name='news_list'),  # страница с новостями
+    path('news/sources/', views.news_sources, name='news_sources'),  # страница с источниками новостей
+
 ]
