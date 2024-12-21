@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Новости</title>
+    </head>
+    <body>
+        <h1>Новости</h1>
+
+        <a href="{% url 'news_sources' %}">Источники новостей</a>
+
+        <ul>
+            {% for article in news %}
+            <li>{{ article.title }} — {{ article.description }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
