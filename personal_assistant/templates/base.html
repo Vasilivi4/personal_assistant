@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Мой Django-проект{% endblock %}</title>
+</head>
+<body>
+    <!-- Навигационное меню -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'news_list' %}">Новости</a></li>
+            <li><a href="{% url 'news_sources' %}">Источники</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основной контент -->
+    {% block content %}{% endblock %}
+</body>
+</html>
