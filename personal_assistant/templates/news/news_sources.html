@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Источники новостей</title>
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <h1>Источники новостей</h1>
+        <ul>
+            {% for source in sources %}
+            <li>{{ source.name }} — {{ source.description }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
