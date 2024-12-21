@@ -6,15 +6,31 @@
         <title>Источники новостей</title>
 
         {% load static %}
-
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+        <!-- Подключение Bootstrap, если используете -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>Источники новостей</h1>
-        <ul>
-            {% for source in sources %}
-            <li>{{ source.name }} — {{ source.description }}</li>
-            {% endfor %}
-        </ul>
+        <div class="container mt-4">
+            <h1 class="text-center mb-4">Источники новостей</h1>
+            
+            <!-- Кнопка-ссылка для перехода к новостям -->
+            <div class="text-center mb-4">
+                <a href="{% url 'news_list' %}" class="btn btn-primary">Назад к новостям</a>
+            </div>
+
+            <ul class="list-group">
+                {% for source in sources %}
+                <li class="list-group-item">
+                    <strong>{{ source.name }}</strong>
+                    <span class="d-block text-muted">{{ source.description }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Подключение JavaScript Bootstrap, если нужно -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
