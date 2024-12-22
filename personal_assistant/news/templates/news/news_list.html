@@ -5,8 +5,7 @@
     <h1 class="text-center mb-4">Новости</h1>
     <div class="text-center">
         <!-- Кнопка-ссылка -->
-        <a href="{% url 'news_sources' %}" class="btn btn-danger">Источники
-            новостей</a>
+        <a href="{% url 'news_sources' %}" class="btn btn-danger">Источники новостей</a>
     </div>
     <ul class="list-group mt-4">
         {% for article in news %}
@@ -17,5 +16,4 @@
         {% endfor %}
     </ul>
 </div>
-
 {% endblock %}
