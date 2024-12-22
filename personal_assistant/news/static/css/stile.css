@@ -1,7 +1,8 @@
 body {
     background-image: url('/static/images/logo.jpg');
-    background-size: cover; /* Это растянет картинку на весь экран */
-    /* background-position: center; */
+    background-size: cover; /* Растягивает картинку на весь экран */
+    background-attachment: fixed; /* Фиксирует картинку при прокрутке */
+    background-position: center; /* Центрирует картинку */
     background-repeat: no-repeat; /* Отключает повторение картинки */
     margin: 0;
     font-family: var(--bs-body-font-family);
