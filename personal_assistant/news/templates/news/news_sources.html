@@ -6,19 +6,18 @@
 
     <!-- Кнопка-ссылка для перехода к новостям -->
     <div class="text-center mb-4">
-        <a href="{% url 'news_list' %}" class="btn btn-primary">Назад к
-            новостям</a>
+        <a href="{% url 'news_list' %}" class="btn btn-primary">Назад к новостям</a>
     </div>
 
     <ul class="list-group">
         {% for source in sources %}
         <li class="list-group-item">
             <strong>{{ source.name }}</strong>
-            <span class="d-block text-muted">{{ source.description
-                }}</span>
+            <span class="d-block text-muted">{{ source.description }}</span>
         </li>
+        {% empty %}
+        <li class="list-group-item">Источники новостей не найдены.</li>
         {% endfor %}
     </ul>
 </div>
-
 {% endblock %}
