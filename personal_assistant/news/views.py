@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from news.services import NewsService
 from newsapi import NewsApiClient
+from django.conf import settings
+from dotenv import load_dotenv
+import os
 
-# Используйте свой API-ключ
-NEWS_API_KEY = "76f31ecb7a7a44b18ea3acb372a988c3"
+load_dotenv(dotenv_path=".env")  # Загружаем переменные из .env
+
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 # Инициализируем объект NewsApiClient один раз
 newsapi = NewsApiClient(api_key=NEWS_API_KEY)
@@ -57,3 +61,18 @@ def get_all_articles():
 # Функция для получения источников новостей
 def get_sources():
     return newsapi.get_sources()
+
+from django.shortcuts import render
+from .services import NewsService
+from django.conf import settings
+
+def news_view(request):
+    # Получаем API ключ из настроек
+    api_key = settings.NEWS_API_KEY
+    news_service = NewsService(api_key=api_key)
+    
+    # Получаем новости
+    news = news_service.fetch_news()
+
+    # Передаем новости в шаблон
+    return render(request, 'news/news_list.html', {'news': news})
