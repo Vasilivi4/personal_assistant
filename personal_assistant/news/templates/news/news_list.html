@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Новости</h1>
+    <div class="text-center">
+        <!-- Кнопка-ссылка -->
+        <a href="{% url 'news_sources' %}" class="btn btn-danger">Источники
+            новостей</a>
+    </div>
+    <ul class="list-group mt-4">
+        {% for article in news %}
+        <li class="list-group-item">
+            <strong>{{ article.title }}</strong>
+            <span class="d-block text-muted">{{ article.description }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
