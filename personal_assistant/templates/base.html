@@ -36,6 +36,10 @@
                             <a class="nav-link"
                                 href="{% url 'news_sources' %}">Источники</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'daily-summary' %}">Финанси</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -51,6 +55,22 @@
         <div>
             {% block content %} {% endblock %}
         </div>
+                <!-- Футер -->
+                <footer class="bg-lighter mt-5">
+                    <div class="container text-center">
+                        <p>
+                            <a href="#" class="text-dark">Выход</a> ·
+                            <a href="#" class="text-dark">Свяжитесь с нами</a> ·
+                            <a href="#" class="text-dark">Правила и условия</a>
+                        </p>
+                        <p>&copy; 2023-2024 GoIT. Все права защищены.</p>
+                        <p>@ Нашы имена</p>
+                        <p>@ Нашы имена</p>
+                        <p>@ Нашы имена</p>
+                        <p>@ Нашы имена</p>
+                        <p>@ Нашы имена</p>
+                    </div>
+                </footer>
 
         <!-- Подключение JS Bootstrap (если нужно) -->
         <script
