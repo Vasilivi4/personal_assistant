@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),  # Главный маршрут связан с accounts
     path('contacts/', include('contacts.urls')),  # Комент убераем и работаем
+    path('accounts/', include('accounts.urls')),  # Главный маршрут связан с accounts
+    # path('contacts/', include('contacts.urls')), # Комент убераем и работаем
     # path('notes/', include('notes.urls')),
     # path('files/', include('files.urls')),
     # path('news/', include('news.urls')),
