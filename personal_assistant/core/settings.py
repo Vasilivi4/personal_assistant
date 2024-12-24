@@ -21,6 +21,7 @@ load_dotenv(dotenv_path=".env")
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+CURRENCY_API_KEY = os.getenv("CURRENCY_API_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
