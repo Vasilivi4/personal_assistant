@@ -1,0 +1,67 @@
+body {
+    background-image: url('/static/images/logo.jpg');
+    background-size: cover;
+    /* Растягивает картинку на весь экран */
+    background-attachment: fixed;
+    /* Фиксирует картинку при прокрутке */
+    background-position: center;
+    /* Центрирует картинку */
+    background-repeat: no-repeat;
+    /* Отключает повторение картинки */
+
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: #2379cf;
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.titul {
+    font-size: 70px;
+    text-align: center !important;
+    padding-top: 200px;
+}
+
+.container {
+    padding-top: 50px;
+    /* Отступ сверху */
+}
+
+.menu {
+    padding-top: 150px;
+    padding-right: 3rem !important;
+    /* Отступ сверху */
+}
+
+.navbar {
+    background: rgba(255, 253, 253, 0.479);
+    /* Прозрачный фон */
+}
+
+.text-centers {
+    padding-top: 1px;
+    text-align: center !important;
+}
+
+.d-block {
+    color: #2379cf;
+}
+
+.list-group {
+    padding-top: 50px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--bs-list-group-color);
+    text-decoration: none;
+    background: rgba(255, 253, 253, 0.6);
+    border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+}
