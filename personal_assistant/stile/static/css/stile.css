@@ -27,7 +27,7 @@ body {
 }
 
 .container {
-    padding-top: 50px;
+    padding-top: 10px;
     /* Отступ сверху */
 }
 
@@ -37,9 +37,19 @@ body {
     /* Отступ сверху */
 }
 
+.bg-lighter {
+
+    background: rgba(255, 253, 253, 0.479);
+}
+
 .navbar {
     background: rgba(255, 253, 253, 0.479);
     /* Прозрачный фон */
+}
+
+.card {
+
+    background: rgba(255, 253, 253, 0.479);
 }
 
 .text-centers {
