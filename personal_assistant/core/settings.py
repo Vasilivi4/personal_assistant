@@ -13,8 +13,18 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv(dotenv_path=".env")
+
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -56,7 +66,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"], 
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -124,7 +134,7 @@ STATIC_URL = "/static/"  # URL для доступа к статическим �
 
 # Указываем дополнительные папки со статикой, если необходимо
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'news', 'static'),
+    os.path.join(BASE_DIR, 'stile', 'static'),
 ]
 
 
