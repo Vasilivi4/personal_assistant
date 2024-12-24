@@ -1,8 +1,20 @@
 from django.shortcuts import render
 import requests
 import logging
-
 from news.models import NewsSummary
+from django import forms
+
+class CategoryForm(forms.Form):
+    CATEGORY_CHOICES = [
+        ('business', 'Business'),
+        ('entertainment', 'Entertainment'),
+        ('general', 'General'),
+        ('health', 'Health'),
+        ('science', 'Science'),
+        ('sports', 'Sports'),
+        ('technology', 'Technology'),
+    ]
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=False, label="Category")
 
 class NewsService:
     def __init__(self, api_key, base_url="https://newsapi.org/v2"):
@@ -56,11 +68,23 @@ class NewsService:
             return response.json().get("sources", [])
         except requests.exceptions.RequestException as e:
             self.logger.error(f"Error fetching sources: {e}")
-
             return [
                 {"name": "Source 1", "description": "Description 1"},
                 {"name": "Source 2", "description": "Description 2"},
             ]
+
 def news_list_view(request):
-    news = NewsSummary.objects.all().order_by('-date')  # Получаем все новости, отсортированные по дате
-    return render(request, 'news/news_list.html', {'news': news})
+    form = CategoryForm(request.GET)  # Получаем данные формы из GET-запроса
+    news = []
+
+    if form.is_valid():
+        selected_category = form.cleaned_data.get('category')
+        if selected_category:
+            news_service = NewsService(api_key='your_api_key')
+            news = news_service.fetch_news(category=selected_category)  # Получаем новости по выбранной категории
+    else:
+        # Если форма не отправлена, получаем все новости
+        news = NewsSummary.objects.all().order_by('-date')  # Получаем все новости, отсортированные по дате
+
+    return render(request, 'news/news_list.html', {'news': news, 'form': form})
+
