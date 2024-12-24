@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import requests
 from news.services import NewsService
 from newsapi import NewsApiClient
 from news.weather_service import WeatherAPI
@@ -8,6 +9,8 @@ from django.conf import settings
 from dotenv import load_dotenv
 import os
 
+from news.servic import CurrencyServic
+
 
 load_dotenv(dotenv_path=".env")
 
@@ -15,7 +18,9 @@ NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
 
+
 def news_list(request):
+    # Получение категории из запроса
     category = request.GET.get("category")
 
     # Получение новостей
@@ -27,14 +32,26 @@ def news_list(request):
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
+    # Категории новостей
+    categories = [
+        {"key": "finance", "name": "Финансы"},
+        {"key": "sports", "name": "Спорт"},
+        {"key": "technology", "name": "Технологии"},
+        {"key": "health", "name": "Здоровье"},
+        {"key": "entertainment", "name": "Развлечения"},
+    ]
+
     context = {
         "news": news,
         "category": category,
+        "categories": categories,
+        "selected_category": category,
         "city": city,
         "weather_data": weather_data,
     }
 
     return render(request, "news/news_list.html", context)
+
 
 
 def news_sources(request):
@@ -101,3 +118,38 @@ def weather_widget_view(request):
         "news/weather_widget.html",
         {"weather_data": weather_data, "city": city},
     )
+
+def daily_summary(request):
+    # Получение новостей (это уже ваш код)
+
+    # Получение курсов валют (новый код)
+    currency_service = CurrencyServic(api_url=f"https://openexchangerates.org/api/latest.json?app_id={settings.CURRENCY_API_KEY}")
+    rates = currency_service.fetch_rates()  # Получаем курсы валют
+
+    context = {
+        "rates": rates,  # Добавляем курсы валют в контекст
+    }
+
+    return render(request, "news/daily_summary.html", context)
+
+def fetch_rates(self):
+    try:
+        response = requests.get(self.api_url)
+        response.raise_for_status()  # Проверка на ошибки при запросе
+        data = response.json()  # Преобразуем ответ в JSON
+
+        # Извлечение курсов валют
+        rates = data.get('rates', {})  # Получаем курсы валют из JSON ответа
+
+        # Пример извлечения конкретных валют:
+        usd_to_eur = rates.get('EUR', 'Не доступно')  # Курс доллара к евро
+        usd_to_gbp = rates.get('GBP', 'Не доступно')  # Курс доллара к фунту
+
+        return {
+            'USD to EUR': usd_to_eur,
+            'USD to GBP': usd_to_gbp,
+            # Можно добавить другие валюты
+        }
+
+    except requests.exceptions.RequestException as e:
+        return {'error': f"Ошибка при получении данных: {e}"}
