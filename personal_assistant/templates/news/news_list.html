@@ -4,20 +4,28 @@
 <div class="container mt-4">
     <h1 class="text-center mb-4">Новости</h1>
 
-    <!-- Кнопка-ссылка для перехода к новостям -->
-    <!-- <div class="text-center mb-4"> -->
-    <!-- <a href="{% url 'news_list' %}" class="btn btn-primary">Назад к новостям</a> -->
-    <!-- </div> -->
+    <!-- Фильтр по категориям -->
+    <div class="text-center mb-4">
+        <a href="?category=general" class="btn btn-primary">Общие</a>
+        <a href="?category=business" class="btn btn-primary">Бизнес</a>
+        <a href="?category=sports" class="btn btn-primary">Спорт</a>
+        <a href="?category=technology" class="btn btn-primary">Технологии</a>
+    </div>
 
-    <ul class="list-group">
+    <!-- Отображение списка новостей в виде карточек -->
+    <div class="row">
         {% for item in news %}
-        <li class="list-group-item">
-            <strong>{{ source.name }}</strong>
-                <span class="d-block text-muted">
-                    <a href="{{ item.url }}">{{ item.title }}</a>
-                </span>
-        </li>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ item.image_url }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a href="{{ item.url }}" class="btn btn-primary" target="_blank">Читать далее</a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}
