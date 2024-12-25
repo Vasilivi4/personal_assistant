@@ -18,7 +18,6 @@ class WeatherAPI:
             response.raise_for_status()
             data = response.json()
 
-            # Парсинг необходимых данных
             location = data.get('location', {})
             current = data.get('current', {})
             
