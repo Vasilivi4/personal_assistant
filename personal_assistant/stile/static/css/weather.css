@@ -1,0 +1,24 @@
+/* Стили для виджета погоды */
+.weather-widget {
+    position: fixed;
+    top: 150px;
+    right: 50px;
+    width: 200px;
+    background: rgba(133, 148, 138, 0.667); /* Прозрачный фон */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    z-index: 1000; /* Поверх основного контента */
+}
+.weather-widget h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #2379cf;
+}
+.weather-widget p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}

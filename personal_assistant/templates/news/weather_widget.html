@@ -1,0 +1,11 @@
+<div>
+    {% if weather_data.error %}
+        <p>{{ weather_data.error }}</p>
+    {% else %}
+        <p>Температура: {{ weather_data.temperature }}°C</p>
+        <p>Состояние: {{ weather_data.condition }}</p>
+        <p>Скорость ветра: {{ weather_data.wind_speed }} км/ч</p>
+        <p>Влажность: {{ weather_data.humidity }}%</p>
+        <p>Местное время: {{ weather_data.local_time }}</p>
+    {% endif %}
+</div>
