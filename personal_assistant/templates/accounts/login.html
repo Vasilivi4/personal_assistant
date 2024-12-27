@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if messages %}
+<div class="container bg-lighter">
+    {% for message in messages %}
+    <div class="alert {% if message.tags %} alert-{{ message.tags }} {% endif %} p-2">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container bg-lighter card">
+    <h2 class="titul">Login</h2>
+    
+    <form action="{% url 'accounts:login' %}" method="post" class="p-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label d-block">Username:</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Password:</label>
+            {{ form.password }}
+        </div>
+
+        <div class="text-centers">
+            <button type="submit" class="btn knopka">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

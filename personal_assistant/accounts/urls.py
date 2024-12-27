@@ -1,8 +1,11 @@
 from django.urls import path
-from . import views
+from .views import signupuser, loginuser, logoutuser
+
+app_name = 'accounts'
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Главная страница для accounts http://127.0.0.1:8000/accounts/
-    path('login/', views.login_view, name='login'),#http://127.0.0.1:8000/accounts/login/
-    path('signup/', views.signup_view, name='signup'),#http://127.0.0.1:8000/accounts/signup/
-]
+    path('signup/', signupuser, name='signup'),
+    path('login/', loginuser, name='login'),
+    path('logout/', logoutuser, name='logout'),
+    # path('profile/', profile, name='profile'),
+    ]

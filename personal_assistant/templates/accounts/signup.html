@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container bg-lighter card">
+    <h2 class="titul">Sign Up</h2>
+    
+    <form method="post" action="{% url 'accounts:signup' %}" class="p-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label d-block">Username:</label>
+            {{ form.username }}
+            <span class="text-danger">{{ form.errors.username }}</span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Password:</label>
+            {{ form.password1 }}
+            <span class="text-danger">{{ form.errors.password1 }}</span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Password confirmation:</label>
+            {{ form.password2 }}
+            <span class="text-danger">{{ form.errors.password2 }}</span>
+        </div>
+
+        <div class="text-centers">
+            <button type="submit" class="btn knopka">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

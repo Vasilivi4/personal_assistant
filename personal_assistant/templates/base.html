@@ -18,8 +18,17 @@
     </head>
     <body>
         <div class="register">
-            <button class="logo">Log in</button>
-            <button class="sign">Sign In</button>
+            {% if user.is_authenticated %}
+    <ul>
+        <li>Welcome <b>{{ user.username }}!</b></li>
+        <li><a href="{% url 'accounts:logout' %}" role="button">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul>
+        <li ><a href="{% url 'accounts:signup' %}" role="button" >Sign Up</a></li>
+        <li ><a href="{% url 'accounts:login' %}" role="button" >Login</a></li>
+    </ul>
+    {% endif %}
         </div>
         <!-- Навигационное меню -->
         <p class="titul">
