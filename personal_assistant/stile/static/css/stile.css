@@ -45,6 +45,7 @@ body {
 .navbar {
     background: rgba(255, 253, 253, 0.479);
     /* Прозрачный фон */
+  
 }
 
 .card {
@@ -93,4 +94,8 @@ body {
     background: rgba(255, 253, 253, 0.6);
     margin-left: 30px;
 
+}
+
+.knopka {
+    background: rgba(142, 152, 74, 0.6);
 }
