@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import os
 
 from news.servic import CurrencyServic
+from news.models import News
 
 
 load_dotenv(dotenv_path=".env")
@@ -22,7 +23,10 @@ newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 def news_list(request):
 
     category = request.GET.get("category")
-
+    if category:
+        news = News.objects.filter(category=category)
+    else:
+        news = News.objects.all()
 
     service = NewsService(api_key=settings.NEWS_API_KEY)
     news = service.fetch_news(category=category)
