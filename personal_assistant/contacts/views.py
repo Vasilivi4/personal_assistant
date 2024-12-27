@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Contact
-from .forms import ContactForm, ContactSearchForm
+from contacts.models import Contact
+from contacts.forms import ContactForm, ContactSearchForm
 from datetime import timedelta
 from django.utils import timezone
 
