@@ -9,6 +9,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 graphviz = "^0.20.3"
+django = "^5.1.4"
+python-dotenv = "^1.0.1"
+sqlparse = "^0.5.3"
+typing-extensions = "^4.12.2"
+tzdata = "^2024.2"
+asgiref = "^3.8.1"
 
 
 [build-system]
