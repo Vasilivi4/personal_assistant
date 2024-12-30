@@ -1,11 +1,15 @@
+"""Module providing a function printing python version."""
+
 import requests
 
 class WeatherAPI:
+    """Class WeatherAPI representing a person"""
     def __init__(self, api_key):
         self.base_url = "http://api.weatherapi.com/v1"
         self.api_key = api_key
 
     def get_current_weather(self, city, lang="ru"):
+        """Function create_contact printing python version."""
         endpoint = f"{self.base_url}/current.json"
         params = {
             "key": self.api_key,
@@ -14,7 +18,7 @@ class WeatherAPI:
         }
 
         try:
-            response = requests.get(endpoint, params=params)
+            response = requests.get(endpoint, params=params, timeout=10)# Дабавил timeout=10
             response.raise_for_status()
             data = response.json()
 
