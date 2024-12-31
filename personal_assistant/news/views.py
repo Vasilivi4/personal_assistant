@@ -165,3 +165,7 @@ def contact_us(request):
 def terms_and_conditions(request):
     """Function terms_and_conditions printing python version."""
     return render(request, "news/terms_link.html")
+
+def index(request):
+    """Function terms_and_conditions printing python version."""
+    return render(request, "news/index.html")
