@@ -4,10 +4,10 @@
 <div class="container mt-4">
     <h1 class="text-center mb-4">Источники новостей</h1>
 
-    <!-- Кнопка-ссылка для перехода к новостям -->
-    <!-- <div class="text-center mb-4"> -->
-        <!-- <a href="{% url 'news_list' %}" class="btn btn-primary">Назад к новостям</a> -->
-    <!-- </div> -->
+    <!-- Кнопка возврата на главную страницу -->
+    <div class="text-center mt-3">
+        <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
+    </div>
 
     <ul class="list-group">
         {% for source in sources %}
