@@ -1,12 +1,14 @@
+"""Module providing a function printing python version."""
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
+from accounts.forms import RegisterForm, LoginForm
 
 
-# Create your views here.
 def signupuser(request):
+    """Function signupuser printing python version."""
     if request.user.is_authenticated:
         return redirect(to='index')
 
@@ -21,6 +23,7 @@ def signupuser(request):
     return render(request,'accounts/signup.html', context={'form': RegisterForm()})
 
 def loginuser(request):
+    """Function loginuser printing python version."""
     if request.user.is_authenticated:
         return redirect(to='index')
 
@@ -37,5 +40,6 @@ def loginuser(request):
 
 @login_required
 def logoutuser(request):
+    """Function loginuser printing python version."""
     logout(request)
     return redirect(to='index')
