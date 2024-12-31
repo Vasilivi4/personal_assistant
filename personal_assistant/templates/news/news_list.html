@@ -11,6 +11,10 @@
         <a href="?category=business" class="btn btn-primary">Бизнес</a>
         <a href="?category=sports" class="btn btn-primary">Спорт</a>
         <a href="?category=technology" class="btn btn-primary">Технологии</a>
+        <!-- Кнопка возврата на главную страницу -->
+        <div class="text-center mt-3">
+            <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
+        </div>
     </div>
 
     <!-- Отображение списка новостей в виде карточек -->
@@ -22,7 +26,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
                     <p class="card-text">{{ item.description }}</p>
-                    <a href="{{ item.url }}" class="btn btn-primary" target="_blank">Читать далее</a>
+                    <a href="{{ item.url }}" class="btn btn-primary"
+                        target="_blank">Читать далее</a>
                 </div>
             </div>
         </div>
