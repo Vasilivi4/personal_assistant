@@ -1,3 +1,5 @@
+"""Module providing a function printing python version."""
+
 from django.urls import path
 from news import views
 
