@@ -21,34 +21,40 @@ newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
 def news_list(request):
     """Function news_list printing python version."""
-    category = request.GET.get("category")
-    if category:
-        news = News.objects.filter(category=category)
-    else:
-        news = News.objects.all()
 
+    # Определяем категории и их соответствие API
+    categories = [
+        {"key": "finance", "name": "Финансы", "api_category": "business"},
+        {"key": "sports", "name": "Спорт", "api_category": "sports"},
+        {"key": "technology", "name": "Технологии", "api_category": "technology"},
+        {"key": "health", "name": "Здоровье", "api_category": "health"},
+        {"key": "entertainment", "name": "Развлечения", "api_category": "entertainment"},
+    ]
+
+    # Получаем выбранную категорию из GET-параметров
+    selected_category = request.GET.get("category")
+    category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
+    api_category = category_mapping.get(selected_category)
+
+    # Инициализируем сервис новостей
     service = NewsService(api_key=settings.NEWS_API_KEY)
-    news = service.fetch_news(category=category)
 
+    # Получаем новости
+    if api_category:
+        news = service.fetch_news(category=api_category)
+    else:
+        news = service.fetch_news()
 
+    # Информация о погоде
     city = "Киев"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
-
-    categories = [
-        {"key": "finance", "name": "Финансы"},
-        {"key": "sports", "name": "Спорт"},
-        {"key": "technology", "name": "Технологии"},
-        {"key": "health", "name": "Здоровье"},
-        {"key": "entertainment", "name": "Развлечения"},
-    ]
-
+    # Контекст для рендера
     context = {
         "news": news,
-        "category": category,
         "categories": categories,
-        "selected_category": category,
+        "selected_category": selected_category,
         "city": city,
         "weather_data": weather_data,
     }
@@ -169,3 +175,14 @@ def terms_and_conditions(request):
 def index(request):
     """Function terms_and_conditions printing python version."""
     return render(request, "news/index.html")
+
+def fetch_news(self, category=None):
+    try:
+        response = newsapi.get_top_headlines(
+            category=category,  # Передайте 'business' для финансов
+            language="en",
+            country="us",
+        )
+        return response.get("articles", [])
+    except Exception as e:
+        return {"error": str(e)}
