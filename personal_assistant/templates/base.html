@@ -30,11 +30,9 @@
     </ul>
     {% endif %}
         </div>
-        <!-- Навигационное меню -->
         <p class="titul">
             <img src="{% static 'images/assistant.png' %}">
         </p>
-        <!-- Навигационное меню с классами Bootstrap -->
         <div class="menu ps-5">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand ps-3" href="#">Menu</a>
@@ -76,17 +74,13 @@
             </nav>
         </div>
 
-        <!-- Виджет погоды -->
-        <!-- Виджет погоды -->
         <div class="weather-widget">
             <h2>Погода в {{ city }}</h2>
             {% include "news/weather_widget.html" %}
-            <!-- Основной контент -->
         </div>
         <div>
             {% block content %} {% endblock %}
         </div>
-        <!-- Футер -->
         <footer class="bg-lighter mt-5">
             <div class="container text-center">
                 <p>
@@ -105,7 +99,6 @@
             </div>
         </footer>
 
-        <!-- Подключение JS Bootstrap (если нужно) -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
