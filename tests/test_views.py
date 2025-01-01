@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 from news.models import News
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 def test_news_list_view(client):
     News.objects.create(title="Finance News", content="Content", category="finance")
     url = reverse("news_list")
