@@ -35,3 +35,4 @@ class News(models.Model):
         """__str__ returns <type 'str'>"""
         self.title = self.title
         return self.title
+    
