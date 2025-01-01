@@ -1,7 +1,7 @@
 import pytest
 from news.services import NewsService
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 def test_news_service_fetch_news(mocker):
     mock_response = {"articles": [{"title": "Test News", "content": "Test Content"}]}
     mocker.patch("news.services.NewsService.fetch_news", return_value=mock_response)
