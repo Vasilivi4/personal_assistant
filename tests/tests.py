@@ -8,7 +8,7 @@ def test_news_list_view(client):
     News.objects.create(title="Test News", content="Test Content", category="finance")
 
     # Делаем запрос к представлению
-    url = reverse("news_list")  # Убедитесь, что имя маршрута соответствует вашему
+    url = reverse("news:news_list")  # Убедитесь, что имя маршрута соответствует вашему
     response = client.get(url)
 
     # Проверяем, что страница загружается
@@ -22,7 +22,7 @@ def test_news_list_category_filter(client):
     News.objects.create(title="Sports News", content="Content", category="sports")
 
     # Фильтруем по категории
-    url = reverse("news_list")
+    url = reverse("news:news_list")
     response = client.get(url, {"category": "finance"})
 
     # Проверяем, что фильтр работает
