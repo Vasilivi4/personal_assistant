@@ -149,24 +149,24 @@ def test_weather_widget_view(client, mocker):
 
 
 def test_index(client):
-    """Function test_weather_widget_view printing python version."""
+    """Function test_index printing python version."""
     response = client.get('/')
     assert response.status_code == 200
     content = response.content.decode('utf-8')
     assert "<h1>Главная страница</h1>" in content
 
 def test_contact_us(client):
-    """Тестирование страницы контактов."""
+    """Function test_contact_us printing python version."""
     response = client.get('/contact/')
     assert response.status_code == 200
     assert "<h1>Свяжитесь</h1>" in response.content.decode('utf-8')
 
 def test_terms_and_conditions(client):
-    """Тестирование страницы условий использования."""
+    """Function test_terms_and_conditions printing python version."""
     response = client.get('/terms/')
     assert response.status_code == 200
     content = response.content.decode('utf-8')
-    assert "<h1>Условия</h1>" in content  # или другой элемент страницы
+    assert "<h1>Условия</h1>" in content
 
 
 @patch('newsapi.NewsApiClient.get_top_headlines')
