@@ -9,7 +9,6 @@ from news.services import NewsService
 from newsapi import NewsApiClient
 from news.weather_service import WeatherAPI
 from news.servic import CurrencyServic
-from news.models import News
 
 
 load_dotenv(dotenv_path=".env")
