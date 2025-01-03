@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .forms import RegisterForm, LoginForm
 
@@ -21,9 +21,10 @@ def signupuser(request):
             form.save()
             return redirect(to='news:index')
         else:
-            return render(request,'accounts/signup.html', {'form': form})
+            return render(request, 'accounts/signup.html', {'form': form})
 
-    return render(request,'accounts/signup.html', context={'form': RegisterForm()})
+    return render(request, 'accounts/signup.html', context={'form': RegisterForm()})
+
 
 def loginuser(request):
     """Function loginuser printing python version."""
@@ -33,7 +34,7 @@ def loginuser(request):
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            messages.error(request, 'Username or password did\'t match')
+            messages.error(request, 'Username or password didn\'t match')
             return redirect(to='accounts:login')
 
         login(request, user)
@@ -41,11 +42,13 @@ def loginuser(request):
 
     return render(request, 'accounts/login.html', context={'form': LoginForm()})
 
+
 @login_required
 def logoutuser(request):
     """Function loginuser printing python version."""
     logout(request)
     return redirect(to='news:index')
+
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     """Class ResetPasswordView printing python version."""
