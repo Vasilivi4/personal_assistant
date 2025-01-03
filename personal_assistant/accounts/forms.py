@@ -10,6 +10,10 @@ class RegisterForm(UserCreationForm):
                                required=True,
                                widget=forms.TextInput())
 
+    email = forms.CharField(max_length=100,
+                            required=True,
+                            widget=forms.TextInput())
+
     password1 = forms.CharField(max_length=50,
                                required=True,
                                widget=forms.PasswordInput())
@@ -21,7 +25,7 @@ class RegisterForm(UserCreationForm):
     class Meta:
         """Class Meta representing a person"""
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
 class LoginForm(AuthenticationForm):
     """Class LoginForm representing a person"""

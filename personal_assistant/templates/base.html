@@ -14,6 +14,19 @@
         <link rel="stylesheet" type="text/css"
             href="{% static 'css/weather.css' %}">
 
+         <div class="register">
+    {% if user.is_authenticated %}
+    <ul>
+        <li>Welcome <b>{{ user.username }}!</b></li>
+        <li><a href="{% url 'accounts:logout' %}" role="button">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul>
+        <li><a href="{% url 'accounts:signup' %}" role="button">Sign Up</a></li>
+        <li><a href="{% url 'accounts:login' %}" role="button">Login</a></li>
+    </ul>
+    {% endif %}
+        </div>
         <title>Weather Widget</title>
     </head>
     <body>
