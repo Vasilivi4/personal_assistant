@@ -5,10 +5,10 @@ import requests
 from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
-from news.services import NewsService
 from newsapi import NewsApiClient
-from news.weather_service import WeatherAPI
+from news.services import NewsService
 from news.servic import CurrencyServic
+from news.weather_service import WeatherAPI
 
 
 load_dotenv(dotenv_path=".env")
