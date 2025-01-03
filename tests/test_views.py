@@ -1,3 +1,5 @@
+"""Module providing a function printing python version."""
+
 import pytest
 from django.urls import reverse
 
