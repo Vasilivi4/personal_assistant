@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
 from newsapi import NewsApiClient
+from news.models import News
 from news.services import NewsService
 from news.weather_service import WeatherAPI
 
@@ -31,12 +32,19 @@ def news_list(request):
     category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
     api_category = category_mapping.get(selected_category)
 
-    service = NewsService(api_key=settings.NEWS_API_KEY)
-
-    if api_category:
-        news = service.fetch_news(category=api_category)
+    # Если в базе есть записи, используем их
+    if News.objects.exists():
+        if selected_category:
+            news = News.objects.filter(category=selected_category)
+        else:
+            news = News.objects.all()
     else:
-        news = service.fetch_news()
+        # Иначе загружаем из внешнего сервиса
+        service = NewsService(api_key=settings.NEWS_API_KEY)
+        if api_category:
+            news = service.fetch_news(category=api_category)
+        else:
+            news = service.fetch_news()
 
     city = "Киев"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
