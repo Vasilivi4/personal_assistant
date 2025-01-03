@@ -151,7 +151,7 @@ def terms_and_conditions(request):
     return render(request, "news/terms_link.html")
 
 def index(request):
-    """Function terms_and_conditions printing python version."""
+    """Function index printing python version."""
     city = "Киев"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
@@ -161,14 +161,3 @@ def index(request):
         "weather_data": weather_data,
     }
     return render(request, "index.html", context)
-
-def fetch_news(self, category=None):
-    try:
-        response = newsapi.get_top_headlines(
-            category=category,
-            language="en",
-            country="us",
-        )
-        return response.get("articles", [])
-    except Exception as e:
-        return {"error": str(e)}
