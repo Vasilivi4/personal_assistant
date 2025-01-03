@@ -40,8 +40,13 @@
         {% endfor %}
     </ul>
 
-    <a href="{% url 'contact_create' %}" class="btn btn-success mt-3">Додати
+    <a href="{% url 'contacts:contact_create' %}"
+        class="btn btn-success mt-3">Додати
         новий контакт</a>
+    <!-- Кнопка возврата на главную страницу -->
+    <div class="text-center mt-3">
+        <a href="{% url 'news:index' %}" class="btn btn-primary">На главную</a>
+    </div>
 </div>
 
 {% endblock %}
