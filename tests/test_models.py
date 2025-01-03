@@ -16,7 +16,7 @@ def test_news_model():
 
 @pytest.mark.django_db
 def test_news_summary_model():
-    """Function test_news_model printing python version."""
+    """Function test_news_summary_model printing python version."""
     user = User.objects.create(username="testuser")
     
     news_summary = NewsSummary.objects.create(
@@ -31,19 +31,19 @@ def test_news_summary_model():
 
 @pytest.mark.django_db
 def test_news_model_invalid_category():
-    """Function test_news_model printing python version."""
+    """Function test_news_model_invalid_category printing python version."""
     with pytest.raises(ValueError):
         News.objects.create(title="Invalid Category", content="Test Content", category="invalid")
 
 @pytest.mark.django_db
 def test_news_model_blank_content():
-    """Function test_news_model printing python version."""
+    """Function test_news_model_blank_content printing python version."""
     news = News.objects.create(title="Test Title", content="", category="sports")
     assert news.content == ""
 
 @pytest.mark.django_db
 def test_news_filter_by_category():
-    """Function test_news_model printing python version."""
+    """Function test_news_filter_by_category printing python version."""
     News.objects.create(title="Finance News", content="Finance Content", category="finance")
     News.objects.create(title="Sports News", content="Sports Content", category="sports")
 
