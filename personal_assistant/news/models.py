@@ -31,6 +31,12 @@ class News(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Валидация при создании объекта
+        if self.category and self.category not in dict(self.CATEGORY_CHOICES):
+            raise ValueError(f"Invalid category: {self.category}")
+
     def __str__(self):
         """__str__ returns <type 'str'>"""
         self.title = self.title
