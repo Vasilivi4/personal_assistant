@@ -33,7 +33,6 @@ class News(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Валидация при создании объекта
         if self.category and self.category not in dict(self.CATEGORY_CHOICES):
             raise ValueError(f"Invalid category: {self.category}")
 
