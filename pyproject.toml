@@ -18,6 +18,7 @@ asgiref = "^3.8.1"
 requests = "^2.31.0"  # Add this
 newsapi-python = "^0.2.7"  # Add this
 psycopg2-binary = "^2.9.9"  # Use binary instead of psycopg2
+pytest-django = "^4.9.0"
 
 
 [build-system]

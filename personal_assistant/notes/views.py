@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import Note, Tag
 from django import forms
 
@@ -16,14 +17,28 @@ class NoteForm(forms.ModelForm):
 @login_required
 def note_list(request):
     notes = Note.objects.filter(user_id=request.user.id)
+    tags = Tag.objects.all()
+
+    # Search functionality
+    query = request.GET.get("q")
+    if query:
+        notes = notes.filter(Q(title__icontains=query) | Q(content__icontains=query))
+
+    # Tag filtering
+    tag_id = request.GET.get("tag")
+    if tag_id:
+        notes = notes.filter(tags__id=tag_id)
+
     return render(
         request,
         "notes/note_list.html",
         {
             "notes": notes,
+            "tags": tags,
+            "selected_tag": tag_id,
+            "query": query,
         },
     )
-
 
 # Create new note
 @login_required
@@ -86,3 +101,12 @@ def note_toggle_done(request, pk):
 def tag_list(request):
     tags = Tag.objects.all()
     return render(request, "notes/tag_list.html", {"tags": tags})
+
+
+@login_required
+def tag_create(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        if name:
+            Tag.objects.create(name=name)
+    return redirect("notes:note_list")

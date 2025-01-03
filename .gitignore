@@ -170,3 +170,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 personal_assistant.code-workspace
+.vscode/settings.json
