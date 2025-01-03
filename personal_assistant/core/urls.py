@@ -21,8 +21,8 @@ from news import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('news/', include('news.urls')),
-    path('', RedirectView.as_view(url='/news/', permanent=False)),
+    path('', include('news.urls')),
+    # path('', RedirectView.as_view(url='/news/', permanent=False)),
     path('contact/', views.contact_us, name='contact_us'),
     path('terms/', views.terms_and_conditions, name='terms_and_conditions'),
     path('accounts/', include('accounts.urls')),

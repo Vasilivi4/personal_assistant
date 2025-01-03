@@ -10,13 +10,13 @@ from accounts.forms import RegisterForm, LoginForm
 def signupuser(request):
     """Function signupuser printing python version."""
     if request.user.is_authenticated:
-        return redirect(to='index')
+        return redirect(to='news:index')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to='index')
+            return redirect(to='news:index')
         else:
             return render(request,'accounts/signup.html', {'form': form})
 
@@ -25,7 +25,7 @@ def signupuser(request):
 def loginuser(request):
     """Function loginuser printing python version."""
     if request.user.is_authenticated:
-        return redirect(to='index')
+        return redirect(to='news:index')
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -34,7 +34,7 @@ def loginuser(request):
             return redirect(to='accounts:login')
 
         login(request, user)
-        return redirect(to='index')
+        return redirect(to='news:index')
 
     return render(request, 'accounts/login.html', context={'form': LoginForm()})
 
@@ -42,4 +42,4 @@ def loginuser(request):
 def logoutuser(request):
     """Function loginuser printing python version."""
     logout(request)
-    return redirect(to='index')
+    return redirect(to='news:index')
