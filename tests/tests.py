@@ -5,7 +5,7 @@ from django.urls import reverse
 from news.models import News
 
 @pytest.mark.django_db
-def test_news_list_view(client):
+def test_ne_list_view(client):
     """Function test_news_list_view printing python version."""
     News.objects.create(title="Test News", content="Test Content", category="finance")
 
@@ -16,7 +16,7 @@ def test_news_list_view(client):
     assert "Test News" in response.content.decode()
 
 @pytest.mark.django_db
-def test_news_list_category_filter(client):
+def test_ne_list_category_filter(client):
     """Function test_news_list_category_filter printing python version."""
     News.objects.create(title="Finance News", content="Content", category="finance")
     News.objects.create(title="Sports News", content="Content", category="sports")
