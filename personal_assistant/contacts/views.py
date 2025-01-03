@@ -4,7 +4,7 @@ from contacts.forms import ContactForm, ContactSearchForm
 from datetime import timedelta
 from django.utils import timezone
 
-def index(request):
+def get_index(request):
     form = ContactSearchForm(request.GET)
     contacts = Contact.objects.all()
 
@@ -19,7 +19,7 @@ def index(request):
     reminder_date = today + timedelta(days=7)
     birthday_contacts = Contact.objects.filter(birthday=reminder_date)
 
-    return render(request, 'contacts/index.html', {
+    return render(request, 'contacts/hom_contact.html', {
         'contacts': contacts,
         'form': form,
         'birthday_contacts': birthday_contacts
