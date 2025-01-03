@@ -174,12 +174,12 @@ def terms_and_conditions(request):
 
 def index(request):
     """Function terms_and_conditions printing python version."""
-    return render(request, "news/index.html")
+    return render(request, "index.html")
 
 def fetch_news(self, category=None):
     try:
         response = newsapi.get_top_headlines(
-            category=category,  # Передайте 'business' для финансов
+            category=category,
             language="en",
             country="us",
         )
