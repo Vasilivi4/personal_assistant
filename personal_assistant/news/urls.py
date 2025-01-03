@@ -10,5 +10,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('list/', views.news_list, name='news_list'),
     path('news/sources/', views.news_sources, name='news_sources'),
-    path('news/weather/', views.weather_widget_view, name='weather_widget'),
+    # path('news/weather/', views.weather_widget_view, name='weather_widget'),
 ]
