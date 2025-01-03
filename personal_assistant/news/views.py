@@ -109,7 +109,7 @@ def news_view(request):
 
 
 def weather_widget_view(request):
-    """Function weather_widget_view printing python version."""
+    """Function weather_widget_view."""
     city = request.GET.get("city", "Киев")
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
@@ -119,6 +119,8 @@ def weather_widget_view(request):
         "news/weather_widget.html",
         {"weather_data": weather_data, "city": city},
     )
+
+
 
 
 def fetch_rates(self):
@@ -161,3 +163,15 @@ def index(request):
         "weather_data": weather_data,
     }
     return render(request, "index.html", context)
+
+def fetch_news(self, category=None):
+    """Function fetch_news printing python version."""
+    try:
+        response = newsapi.get_top_headlines(
+            category=category,
+            language="en",
+            country="us",
+        )
+        return response.get("articles", [])
+    except Exception as e:
+        return {"error": str(e)}
