@@ -7,7 +7,6 @@ from django.conf import settings
 from dotenv import load_dotenv
 from newsapi import NewsApiClient
 from news.services import NewsService
-from news.servic import CurrencyServic
 from news.weather_service import WeatherAPI
 
 
@@ -20,8 +19,6 @@ newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
 def news_list(request):
     """Function news_list printing python version."""
-
-    # Определяем категории и их соответствие API
     categories = [
         {"key": "finance", "name": "Финансы", "api_category": "business"},
         {"key": "sports", "name": "Спорт", "api_category": "sports"},
@@ -30,26 +27,21 @@ def news_list(request):
         {"key": "entertainment", "name": "Развлечения", "api_category": "entertainment"},
     ]
 
-    # Получаем выбранную категорию из GET-параметров
     selected_category = request.GET.get("category")
     category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
     api_category = category_mapping.get(selected_category)
 
-    # Инициализируем сервис новостей
     service = NewsService(api_key=settings.NEWS_API_KEY)
 
-    # Получаем новости
     if api_category:
         news = service.fetch_news(category=api_category)
     else:
         news = service.fetch_news()
 
-    # Информация о погоде
     city = "Киев"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
-    # Контекст для рендера
     context = {
         "news": news,
         "categories": categories,
@@ -131,16 +123,6 @@ def weather_widget_view(request):
         {"weather_data": weather_data, "city": city},
     )
 
-def daily_summary(request):
-    """Function daily_summary printing python version."""
-    currency_service = CurrencyServic(api_url=f"https://openexchangerates.org/api/latest.json?app_id={settings.CURRENCY_API_KEY}")
-    rates = currency_service.fetch_rates()
-
-    context = {
-        "rates": rates,
-    }
-
-    return render(request, "news/daily_summary.html", context)
 
 def fetch_rates(self):
     """Function fetch_rates printing python version."""
