@@ -10,7 +10,7 @@ class CurrencyServic:
 
     def fetch_rates(self):
         """Function fetch_rates printing python version."""
-        response = requests.get(f"{self.api_url}?apikey={self.api_key}")
+        response = requests.get(f"{self.api_url}?apikey={self.api_key}", timeout=10)
         response.raise_for_status()
         return response.json().get("rates", {})
 # Этот код не рабочий
