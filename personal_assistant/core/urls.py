@@ -25,5 +25,5 @@ urlpatterns = [
     path('terms/', views.terms_and_conditions, name='terms_and_conditions'),
     path('accounts/', include('accounts.urls')),
     path('contacts/', include('contacts.urls')),
-
+    path('files/', include('files.urls')),
 ]
