@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{ action }} Note</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">{{ form.title.label_tag }} {{ form.title }}</div>
+    <div class="mb-3">{{ form.content.label_tag }} {{ form.content }}</div>
+    <div class="mb-3">{{ form.tags.label_tag }} {{ form.tags }}</div>
+    <div class="mb-3">{{ form.new_tag.label_tag }} {{ form.new_tag }}</div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

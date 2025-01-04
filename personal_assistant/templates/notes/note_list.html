@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <!-- Tags Panel -->
+        <div class="card mb-4">
+            <div class="card-header">Tags</div>
+            <div class="card-body">
+                <a href="{% url 'notes:note_list' %}" class="btn btn-sm {% if not selected_tag %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2">All</a>
+                {% for tag in tags %}
+                    <a href="{% url 'notes:note_list' %}?tag={{ tag.id }}" 
+                       class="btn btn-sm {% if selected_tag == tag.id|stringformat:'s' %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2">
+                        {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <!-- Search Form -->
+        <form method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search notes..." value="{{ query|default:'' }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+
+        <!-- Notes List -->
+        <div class="d-flex justify-content-between mb-3">
+            <h2>My Notes</h2>
+            <a href="{% url 'notes:note_create' %}" class="btn btn-primary">New Note</a>
+        </div>
+
+        {% for note in notes %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ note.title }}</h5>
+                    <p class="card-text">{{ note.content }}</p>
+                    <div class="tags mb-2">
+                        {% for tag in note.tags.all %}
+                            <span class="badge bg-secondary">{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="btn-group">
+                        <a href="{% url 'notes:note_edit' note.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'notes:note_delete' note.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        <form method="POST" action="{% url 'notes:note_toggle_done' note.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                {% if note.done %}Mark Undone{% else %}Mark Done{% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No notes found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
