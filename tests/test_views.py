@@ -153,7 +153,7 @@ def test_index(client):
     response = client.get('/')
     assert response.status_code == 200
     content = response.content.decode('utf-8')
-    assert "<h1>Главная страница</h1>" in content
+    assert "<h1>Personal_Assistant</h1>" in content
 
 def test_contact_us(client):
     """Function test_contact_us printing python version."""
