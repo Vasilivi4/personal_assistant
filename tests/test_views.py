@@ -159,7 +159,8 @@ def test_contact_us(client):
     """Function test_contact_us printing python version."""
     response = client.get('/contact/')
     assert response.status_code == 200
-    assert "<h1>Свяжитесь</h1>" in response.content.decode('utf-8')
+    content = response.content.decode('utf-8')
+    assert "<h1>Свяжитесь</h1>" in content
 
 def test_terms_and_conditions(client):
     """Function test_terms_and_conditions printing python version."""
