@@ -166,3 +166,12 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Google Cloud Storage налаштування
+GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'service-account-key.json')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME = 'personal-assistant-446316'  # ім'я bucket
+GS_DEFAULT_ACL = 'publicRead'  # відчиненість URL-адреса
+
