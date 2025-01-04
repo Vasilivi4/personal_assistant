@@ -21,6 +21,10 @@ psycopg2-binary = "^2.9.9"  # Use binary instead of psycopg2
 pytest-django = "^4.9.0"
 
 
+[tool.poetry.group.dev.dependencies]
+pytest-django = "^4.9.0"
+pytest-postgres = "^0.7.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

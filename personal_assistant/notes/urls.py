@@ -10,4 +10,5 @@ urlpatterns = [
     path("delete/<int:pk>/", views.note_delete, name="note_delete"),
     path("toggle-done/<int:pk>/", views.note_toggle_done, name="note_toggle_done"),
     path("tag/create/", views.tag_create, name="tag_create"),
+    path("tags/", views.tag_list, name="tag_list"),
 ]

@@ -40,6 +40,7 @@ def note_list(request):
         },
     )
 
+
 # Create new note
 @login_required
 def note_create(request):
