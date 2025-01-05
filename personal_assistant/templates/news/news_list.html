@@ -11,13 +11,14 @@
         <a href="?category=sports" class="btn btn-primary">Спорт</a>
         <a href="?category=technology" class="btn btn-primary">Технологии</a>
         <a href="?category=health" class="btn btn-primary">Здоровье</a>
-        <a href="?category=entertainment" class="btn btn-primary">Развлечения</a>
+        <a href="?category=entertainment"
+            class="btn btn-primary">Развлечения</a>
         <!-- Кнопка возврата на главную страницу -->
         <div class="text-center mt-3">
-            <a href="{% url 'news:index' %}" class="btn btn-primary">На главную</a>
+            <a href="{% url 'news:index' %}" class="btn btn-primary">На
+                главную</a>
         </div>
     </div>
-
     <!-- Отображение списка новостей в виде карточек -->
     <div class="row">
         {% for item in news %}

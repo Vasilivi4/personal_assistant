@@ -16,7 +16,13 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
+form {
+    background: rgba(255, 253, 253, 0.479);
+}
 
+ul {
+    background: rgba(255, 253, 253, 0.479);
+}
 .titul {
     text-align: center !important;
     padding-top: 150px;
@@ -94,5 +100,5 @@ body {
 }
 
 h1 {
-    background: rgba(255, 253, 253, 0.6);
+    color: #000;
 }

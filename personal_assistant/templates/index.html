@@ -2,7 +2,19 @@
 
 {% block content %}
 
-
+<div class="register">
+    {% if user.is_authenticated %}
+    <ul>
+        <li>Welcome <b>{{ user.username }}!</b></li>
+        <li><a href="{% url 'accounts:logout' %}" role="button">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul>
+        <li><a href="{% url 'accounts:signup' %}" role="button">Sign Up</a></li>
+        <li><a href="{% url 'accounts:login' %}" role="button">Login</a></li>
+    </ul>
+    {% endif %}
+</div>
 <div class="menu ps-5">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand ps-3" href="#">Menu</a>
@@ -23,7 +35,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="#">
+                        href="{% url 'files:file_list' %}">
                         <button class="knopka">Файлы</button>
                     </a>
                 </li>
@@ -43,7 +55,6 @@
         </div>
     </nav>
 </div>
-
 <div class="weather-widget">
     <h2>Погода в {{ city }}</h2>
     {% include "news/weather_widget.html" %}
