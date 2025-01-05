@@ -181,11 +181,17 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# робота з файлами
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Google Cloud Storage налаштування
 GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'service-account-key.json')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
 GS_BUCKET_NAME = 'personal-assistant-446316'  # ім'я bucket
 GS_DEFAULT_ACL = 'publicRead'  # відчиненість URL-адреса
+GS_CREDENTIALS = 'service-account-key.json'    # ключ до хмари
 
 
