@@ -1,27 +1,25 @@
-from django.shortcuts import render, redirect
-from files.forms import UploadFileForm
-from files.models import UploadedFile
+# files/views.py
 
+from django.shortcuts import render, redirect
+from .forms import UploadFileForm
+from .models import UserFile
 
 # Уявлення для завантаження файлів
 def upload_file(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)  # Обробка POST-запиту
         if form.is_valid():  # Перевірка валідності форми
             form.save()  # Збереження файлу в базі даних
-            return redirect("files:file_list")  # Перенаправлення на список файлів
+            return redirect('file_list')  # Перенаправлення на список файлів
     else:
         form = UploadFileForm()  # Порожня форма для GET-запиту
-    return render(request, "files/upload.html", {"form": form})  # Рендер сторінки
-
+    return render(request, 'files/upload.html', {'form': form})  # Рендер сторінки
 
 # Уявлення для списку файлів
 def file_list(request):
-    category = request.GET.get("category", "all")  # Отримати вибрану категорію
-    if category == "all":  # Якщо категорія "всі", відобразити всі файли
-        files = UploadedFile.objects.all()
+    category = request.GET.get('category', 'all')  # Отримати вибрану категорію
+    if category == 'all':  # Якщо категорія "всі", відобразити всі файли
+        files = UserFile.objects.all()
     else:  # Інакше - фільтрувати за категорією
-        files = UploadedFile.objects.filter(category=category)
-    return render(
-        request, "files/file_list.html", {"files": files, "category": category}
-    )
+        files = UserFile.objects.filter(category=category)
+    return render(request, 'files/file_list.html', {'files': files, 'category': category})
