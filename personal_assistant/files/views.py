@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect
 from .forms import UploadFileForm
-from .models import UserFile
+from .models import UploadedFile
 
 # Уявлення для завантаження файлів
 def upload_file(request):
@@ -19,7 +19,7 @@ def upload_file(request):
 def file_list(request):
     category = request.GET.get('category', 'all')  # Отримати вибрану категорію
     if category == 'all':  # Якщо категорія "всі", відобразити всі файли
-        files = UserFile.objects.all()
+        files = UploadedFile.objects.all()
     else:  # Інакше - фільтрувати за категорією
-        files = UserFile.objects.filter(category=category)
+        files = UploadedFile.objects.filter(category=category)
     return render(request, 'files/file_list.html', {'files': files, 'category': category})
