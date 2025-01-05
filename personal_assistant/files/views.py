@@ -1,5 +1,4 @@
 # files/views.py
-
 from django.shortcuts import render, redirect
 from .forms import UploadFileForm
 from .models import UploadedFile
@@ -16,8 +15,7 @@ def upload_file(request):
     return render(request, 'files/upload.html', {'form': form})  # Рендер сторінки
 
 # Уявлення для списку файлів
-def file_list(request):
-    category = request.GET.get('category', 'all')  # Отримати вибрану категорію
+def file_list(request, category=None):
     if category == 'all':  # Якщо категорія "всі", відобразити всі файли
         files = UploadedFile.objects.all()
     else:  # Інакше - фільтрувати за категорією
