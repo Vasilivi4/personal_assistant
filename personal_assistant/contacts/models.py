@@ -1,11 +1,9 @@
-"""Module providing a function printing python version."""
-
 from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
+from django.contrib.auth.models import User
 
 
 class Contact(models.Model):
-    """Class Contact representing a person"""
     name = models.CharField(max_length=100)
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(
@@ -15,9 +13,10 @@ class Contact(models.Model):
         ],
     )
     email = models.EmailField(validators=[EmailValidator("Некоректний формат email")])
-    birthday = models.DateField(blank=True, null=True)
+    birthday = models.DateField(blank=True, null=True,
+                                help_text="Введіть дату у форматі РРРР-ММ-ДД, наприклад, 2000-01-01")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
 
     def __str__(self):
-        """__str__ returns <type 'str'>"""
-        self.name = self.name
         return self.name
