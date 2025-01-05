@@ -16,6 +16,7 @@ requests = "^2.32.3"
 beautifulsoup4 = "^4.12.3"
 pytest-mock = "^3.14.0"
 coverage = "^7.6.10"
+django-storages = {extras = ["google"], version = "^1.14.4"}
 
 
 [tool.poetry.group.dev.dependencies]
