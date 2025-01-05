@@ -30,21 +30,20 @@
         <title>Weather Widget</title>
     </head>
     <body>
-        <h1>Personal_Assistant</h1>
         </div>
         <p class="titul">
             <img src="{% static 'images/assistant.png' %}">
         </p>
         <div>
-            {% block content %} 
-
-            {% endblock %}
+            {% block content %} {% endblock %}
         </div>
         <footer class="bg-lighter mt-5">
             <div class="container text-center">
                 <p>
-                    <a href="{% url 'contact_us' %}" class="text-dark">Свяжитесь с нами</a> ·
-                    <a href="{% url 'terms_and_conditions' %}" class="text-dark">Правила и условия</a>
+                    <a href="{% url 'contact_us' %}" class="text-dark">Свяжитесь
+                        с нами</a> ·
+                    <a href="{% url 'terms_and_conditions' %}"
+                        class="text-dark">Правила и условия</a>
 
                 </p>
                 <p>&copy; 2023-2024 GoIT. Все права защищены.</p>
