@@ -3,19 +3,16 @@
 from django.db import models
 
 # Модель для зберігання інформації про файли користувачів
-class UserFile(models.Model):
-    CATEGORY_CHOICES = [
-        ('image', 'Зображення'),
-        ('document', 'Документ'),
-        ('video', 'Відео'),
-        ('other', 'Інше'),
-    ]
-
 class UploadedFile(models.Model):
     file = models.FileField(upload_to='uploads/')  # Поле для файлу
     category = models.CharField(
     max_length=10,
-    choices=UserFile.CATEGORY_CHOICES,
+    choices=[
+        ('image', 'Зображення'),
+        ('document', 'Документ'),
+        ('video', 'Відео'),
+        ('other', 'Інше'),
+    ],
     default='other'
     )  
     
