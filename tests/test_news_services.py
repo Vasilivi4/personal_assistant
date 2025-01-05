@@ -19,10 +19,11 @@ def test_news_service_fetch_news(mocker):
 
 @pytest.fixture
 def mock_weather_service():
+    """Function test_news_service_fetch_news printing python version."""
     return WeatherAPI(api_key="fake_key")
 
 def test_weather_service_get_current_weather(mocker, mock_weather_service):
-    # Мок-ответ от API
+    """Function test_news_service_fetch_news printing python version."""
     mock_response = {
         "location": {
             "name": "Киев",
@@ -38,7 +39,6 @@ def test_weather_service_get_current_weather(mocker, mock_weather_service):
         }
     }
 
-    # Замена requests.get
     mock_requests_get = mocker.patch("requests.get")
     mock_requests_get.return_value = mocker.Mock(
         status_code=200,
@@ -46,10 +46,8 @@ def test_weather_service_get_current_weather(mocker, mock_weather_service):
         raise_for_status=lambda: None
     )
 
-    # Вызов метода
     result = mock_weather_service.get_current_weather("Киев")
 
-    # Проверки
     assert result["location"] == "Киев"
     assert result["region"] == "Киевская область"
     assert result["country"] == "Украина"

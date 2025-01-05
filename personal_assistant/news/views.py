@@ -46,16 +46,10 @@ def news_list(request):
         else:
             news = service.fetch_news()
 
-    city = "Киев"
-    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
-    weather_data = weather_api.get_current_weather(city)
-
     context = {
         "news": news,
         "categories": categories,
         "selected_category": selected_category,
-        "city": city,
-        "weather_data": weather_data,
     }
 
     return render(request, "news/news_list.html", context)
@@ -67,14 +61,9 @@ def news_sources(request):
     service = NewsService(api_key=NEWS_API_KEY)
     sources = service.fetch_sources()
 
-    city = "Киев"
-    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
-    weather_data = weather_api.get_current_weather(city)
 
     context = {
         "sources": sources,
-        "city": city,
-        "weather_data": weather_data,
     }
     return render(request, "news/news_sources.html", context)
 
@@ -120,7 +109,7 @@ def news_view(request):
 
 
 def weather_widget_view(request):
-    """Function weather_widget_view printing python version."""
+    """Function weather_widget_view."""
     city = request.GET.get("city", "Киев")
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
@@ -130,6 +119,8 @@ def weather_widget_view(request):
         "news/weather_widget.html",
         {"weather_data": weather_data, "city": city},
     )
+
+
 
 
 def fetch_rates(self):
@@ -162,10 +153,19 @@ def terms_and_conditions(request):
     return render(request, "news/terms_link.html")
 
 def index(request):
-    """Function terms_and_conditions printing python version."""
-    return render(request, "index.html")
+    """Function index printing python version."""
+    city = "Киев"
+    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
+    weather_data = weather_api.get_current_weather(city)
+
+    context = {
+        "city": city,
+        "weather_data": weather_data,
+    }
+    return render(request, "index.html", context)
 
 def fetch_news(self, category=None):
+    """Function fetch_news printing python version."""
     try:
         response = newsapi.get_top_headlines(
             category=category,

@@ -67,3 +67,4 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         user = form.save()
         login(self.request, user)
         return redirect(self.success_url)
+

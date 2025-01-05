@@ -1,0 +1,21 @@
+# file_list.html
+
+<h1>Список файлів</h1>
+<form method="get">
+    <label for="category">Фільтр за категорією:</label>
+    <select name="category" id="category" onchange="this.form.submit()">
+        <option value="all" {% if category == 'all' %}selected{% endif %}>Всі</option>
+        <option value="image" {% if category == 'image' %}selected{% endif %}>Зображення</option>
+        <option value="document" {% if category == 'document' %}selected{% endif %}>Документи</option>
+        <option value="video" {% if category == 'video' %}selected{% endif %}>Відео</option>
+        <option value="other" {% if category == 'other' %}selected{% endif %}>Інше</option>
+    </select>
+</form>
+
+<ul>
+    {% for file in files %}
+        <li>{{ file.file.name }}</li>
+    {% empty %}
+        <li>Файли відсутні.</li>
+    {% endfor %}
+</ul>
