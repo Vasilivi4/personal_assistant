@@ -1,26 +1,9 @@
-# files/tests.py
+# tests_files_views.py
 
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from .forms import UploadFileForm
-from .models import UploadedFile
-from .models import UserFile
-
-# тест files/models.py
-class UploadedFileModelTest(TestCase):
-    def test_file_upload(self):
-        test_file = SimpleUploadedFile("testfile.txt", b"Test content")
-        uploaded_file = UploadedFile.objects.create(file=test_file)
-        self.assertEqual(uploaded_file.file.name, "uploads/testfile.txt")
-
-# тест files/forms.py
-class UploadFileFormTest(TestCase):
-    def test_valid_form(self):
-        form_data = {}
-        file_data = {'file': SimpleUploadedFile("testfile.txt", b"Test content")}
-        form = UploadFileForm(data=form_data, files=file_data)
-        self.assertTrue(form.is_valid())
+from ..personal_assistant.files.models import UploadedFile
 
 # тест files/views.py/class upload_file
 class FileUploadViewTest(TestCase):
@@ -34,8 +17,8 @@ class FileUploadViewTest(TestCase):
         }
         response = self.client.post(url, file_data)
         self.assertEqual(response.status_code, 302)  # Очікуємо перенаправлення
-        self.assertEqual(UserFile.objects.count(), 1)  # Перевіряємо, що файл збережений у базі даних
-        uploaded_file = UserFile.objects.first()
+        self.assertEqual(UploadedFile.objects.count(), 1)  # Перевіряємо, що файл збережений у базі даних
+        uploaded_file = UploadedFile.objects.first()
         self.assertEqual(uploaded_file.file.name, "uploads/testfile.txt")
         self.assertEqual(uploaded_file.category, "documents")
 
@@ -53,9 +36,9 @@ class FileListViewTest(TestCase):
     def setUp(self):
 
         # Налаштування тестових даних.
-        UserFile.objects.create(file="uploads/image1.jpg", category="images")
-        UserFile.objects.create(file="uploads/doc1.pdf", category="documents")
-        UserFile.objects.create(file="uploads/video1.mp4", category="videos")
+        UploadedFile.objects.create(file="uploads/image1.jpg", category="images")
+        UploadedFile.objects.create(file="uploads/doc1.pdf", category="documents")
+        UploadedFile.objects.create(file="uploads/video1.mp4", category="videos")
 
     def test_file_list_all(self):
 
