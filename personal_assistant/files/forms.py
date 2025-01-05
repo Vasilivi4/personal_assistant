@@ -1,9 +1,9 @@
+# files/forms.py
 from django import forms
-from files.models import UploadedFile
+from .models import UserFile
 
-# Форма для загрузки файлов
+# Форма для завантаження файлів
 class UploadFileForm(forms.ModelForm):
     class Meta:
-        model = UploadedFile
-        fields = ['file', 'category']  # Поля для файла и категории
-
+        model = UserFile
+        fields = ['file', 'category']  # Поля для файлу та категорії
