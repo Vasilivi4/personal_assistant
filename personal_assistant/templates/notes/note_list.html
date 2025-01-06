@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="row">
     <div class="col-md-3">
         <!-- Tags Panel -->
@@ -60,4 +61,10 @@
         {% endfor %}
     </div>
 </div>
+{% else %}
+<div>
+    <p>Ви не авторизовані. Будь ласка, авторизуйтесь для доступу до цієї сторінки.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Авторизуватись</a>
+</div>
+{% endif %}
 {% endblock %}

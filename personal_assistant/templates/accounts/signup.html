@@ -12,25 +12,25 @@
         <label> Username:
             {{ form.username }}
         </label>
-        <span>{{ form.errors.username }}</span>
+        <span>{{ form.username.errors }}</span>
     </div>
     <div>
         <label> Email:
             {{ form.email }}
         </label>
-        <span>{{ form.errors.email }}</span>
+        <span>{{ form.email.errors }}</span>
     </div>
     <div>
         <label> Password:
             {{ form.password1 }}
         </label>
-        <span>{{ form.errors.password1 }}</span>
+        <span>{{ form.password1.errors }}</span>
     </div>
     <div>
         <label> Password confirmation:
             {{ form.password2 }}
         </label>
-        <span>{{ form.errors.password2 }}</span>
+        <span>{{ form.password2.errors }}</span>
     </div>
     <div class="grid">
         <button type="submit">Submit</button>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Personal Assistant</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link
@@ -27,7 +28,41 @@
     </ul>
     {% endif %}
         </div>
-        <title>Weather Widget</title>
+
+        <div class="menu ps-5">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand ps-3" href="#">Menu</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'news:news_list' %}">
+                                <button class="knopka">Новости</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'news:news_sources' %}">
+                                <button class="knopka">Источники новастей</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <button class="knopka">Файлы</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'notes:note_list' %}">
+                                <button class="knopka">Заметки</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contacts:contacts' %}">
+                                <button class="knopka">Контакты</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </head>
     <body>
         </div>

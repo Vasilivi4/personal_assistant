@@ -22,13 +22,17 @@ def signupuser(request):
             email = form.cleaned_data.get('email')
             if User.objects.filter(email=email).exists():
                 form.add_error('email', 'Користувач із такою електронною поштою вже існує.')
+                return render(request, 'accounts/signup.html', {'form': form})
+
             username = form.cleaned_data.get('username')
             if User.objects.filter(username=username).exists():
                 form.add_error('username', 'Користувач із таким іменем уже існує.')
-            else:
-                form.save()
-                return redirect(to='news:index')
-        return render(request, 'accounts/signup.html', {'form': form})
+                return render(request, 'accounts/signup.html', {'form': form})
+
+            form.save()
+            return redirect(to='news:index')
+        else:
+            return render(request, 'accounts/signup.html', {'form': form})
 
     return render(request, 'accounts/signup.html', context={'form': RegisterForm()})
 

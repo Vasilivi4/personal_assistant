@@ -3,10 +3,12 @@ from django.db.models import Q
 from .models import Note, Tag
 from django.http import JsonResponse
 from .forms import NoteForm
+from django.contrib.auth.decorators import login_required
+
 
 def note_list(request):
-    notes = Note.objects.all()
-    tags = Tag.objects.all()
+    notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+    tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     query = request.GET.get("q")
     if query:
         notes = notes.filter(Q(title__icontains=query) | Q(content__icontains=query))
@@ -20,6 +22,7 @@ def note_list(request):
     )
 
 
+@login_required
 def note_create(request):
     if request.method == "POST":
         form = NoteForm(request.POST)
@@ -31,17 +34,15 @@ def note_create(request):
                 if created:
                     form.data = form.data.copy()
                     form.data.setlist("tags", list(form.data.getlist("tags")) + [str(tag.id)])
-            
-            note = form.save(commit=False)
-            note.user_id = 1
-            note.save()
-            form.save_m2m()
+
+            form.save()
             return redirect("notes:note_list")
     else:
         form = NoteForm()
     return render(request, "notes/note_form.html", {"form": form, "action": "Create"})
 
 
+@login_required
 def note_edit(request, pk):
     note = get_object_or_404(Note, pk=pk)
     if request.method == "POST":
@@ -55,7 +56,7 @@ def note_edit(request, pk):
         request, "notes/note_form.html", {"form": form, "note": note, "action": "Edit"}
     )
 
-
+@login_required
 def note_delete(request, pk):
     note = get_object_or_404(Note, pk=pk)
     if request.method == "POST":
@@ -63,19 +64,18 @@ def note_delete(request, pk):
         return redirect("notes:note_list")
     return render(request, "notes/note_confirm_delete.html", {"note": note})
 
-
+@login_required
 def note_toggle_done(request, pk):
     note = get_object_or_404(Note, pk=pk)
     note.done = not note.done
     note.save()
     return redirect("notes:note_list")
 
-
 def tag_list(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, "notes/tag_list.html", {"tags": tags})
 
-
+@login_required
 def tag_create(request):
     if request.method == "POST":
         name = request.POST.get("name")
