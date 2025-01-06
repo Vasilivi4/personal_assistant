@@ -1,16 +1,14 @@
-from django.shortcuts import render
-import requests
-from news.services import NewsService
-from newsapi import NewsApiClient
-from news.weather_service import WeatherAPI
-from django.conf import settings
+"""Module providing a function printing python version."""
 
+import os
+import requests
+from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
-import os
-
-from news.servic import CurrencyServic
+from newsapi import NewsApiClient
 from news.models import News
+from news.services import NewsService
+from news.weather_service import WeatherAPI
 
 
 load_dotenv(dotenv_path=".env")
@@ -21,37 +19,37 @@ newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
 
 def news_list(request):
-
-    category = request.GET.get("category")
-    if category:
-        news = News.objects.filter(category=category)
-    else:
-        news = News.objects.all()
-
-    service = NewsService(api_key=settings.NEWS_API_KEY)
-    news = service.fetch_news(category=category)
-
-
-    city = "Киев"
-    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
-    weather_data = weather_api.get_current_weather(city)
-
-
+    """Function news_list printing python version."""
     categories = [
-        {"key": "finance", "name": "Финансы"},
-        {"key": "sports", "name": "Спорт"},
-        {"key": "technology", "name": "Технологии"},
-        {"key": "health", "name": "Здоровье"},
-        {"key": "entertainment", "name": "Развлечения"},
+        {"key": "finance", "name": "Финансы", "api_category": "business"},
+        {"key": "sports", "name": "Спорт", "api_category": "sports"},
+        {"key": "technology", "name": "Технологии", "api_category": "technology"},
+        {"key": "health", "name": "Здоровье", "api_category": "health"},
+        {"key": "entertainment", "name": "Развлечения", "api_category": "entertainment"},
     ]
+
+    selected_category = request.GET.get("category")
+    category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
+    api_category = category_mapping.get(selected_category)
+
+    # Если в базе есть записи, используем их
+    if News.objects.exists():
+        if selected_category:
+            news = News.objects.filter(category=selected_category)
+        else:
+            news = News.objects.all()
+    else:
+        # Иначе загружаем из внешнего сервиса
+        service = NewsService(api_key=settings.NEWS_API_KEY)
+        if api_category:
+            news = service.fetch_news(category=api_category)
+        else:
+            news = service.fetch_news()
 
     context = {
         "news": news,
-        "category": category,
         "categories": categories,
-        "selected_category": category,
-        "city": city,
-        "weather_data": weather_data,
+        "selected_category": selected_category,
     }
 
     return render(request, "news/news_list.html", context)
@@ -59,23 +57,19 @@ def news_list(request):
 
 
 def news_sources(request):
-
+    """Function news_sources printing python version."""
     service = NewsService(api_key=NEWS_API_KEY)
     sources = service.fetch_sources()
 
-    city = "Киев"
-    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
-    weather_data = weather_api.get_current_weather(city)
 
     context = {
         "sources": sources,
-        "city": city,
-        "weather_data": weather_data,
     }
     return render(request, "news/news_sources.html", context)
 
 
 def get_top_headlines():
+    """Function get_top_headlines printing python version."""
     return newsapi.get_top_headlines(
         q="bitcoin",
         sources="bbc-news,the-verge",
@@ -86,6 +80,7 @@ def get_top_headlines():
 
 
 def get_all_articles():
+    """Function get_all_articles printing python version."""
     return newsapi.get_everything(
         q="bitcoin",
         sources="bbc-news,the-verge",
@@ -99,11 +94,12 @@ def get_all_articles():
 
 
 def get_sources():
+    """Function get_sources printing python version."""
     return newsapi.get_sources()
 
 
 def news_view(request):
-
+    """Function news_view printing python version."""
     api_key = settings.NEWS_API_KEY
     news_service = NewsService(api_key=api_key)
 
@@ -113,6 +109,7 @@ def news_view(request):
 
 
 def weather_widget_view(request):
+    """Function weather_widget_view."""
     city = request.GET.get("city", "Киев")
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
@@ -123,18 +120,11 @@ def weather_widget_view(request):
         {"weather_data": weather_data, "city": city},
     )
 
-def daily_summary(request):
 
-    currency_service = CurrencyServic(api_url=f"https://openexchangerates.org/api/latest.json?app_id={settings.CURRENCY_API_KEY}")
-    rates = currency_service.fetch_rates()
 
-    context = {
-        "rates": rates,
-    }
-
-    return render(request, "news/daily_summary.html", context)
 
 def fetch_rates(self):
+    """Function fetch_rates printing python version."""
     try:
         response = requests.get(self.api_url)
         response.raise_for_status()
@@ -155,7 +145,33 @@ def fetch_rates(self):
         return {'error': f"Ошибка при получении данных: {e}"}
 
 def contact_us(request):
+    """Function contact_us printing python version."""
     return render(request, "news/contact_link.html")
 
 def terms_and_conditions(request):
+    """Function terms_and_conditions printing python version."""
     return render(request, "news/terms_link.html")
+
+def index(request):
+    """Function index printing python version."""
+    city = "Киев"
+    weather_api = WeatherAPI(settings.WEATHER_API_KEY)
+    weather_data = weather_api.get_current_weather(city)
+
+    context = {
+        "city": city,
+        "weather_data": weather_data,
+    }
+    return render(request, "index.html", context)
+
+def fetch_news(self, category=None):
+    """Function fetch_news printing python version."""
+    try:
+        response = newsapi.get_top_headlines(
+            category=category,
+            language="en",
+            country="us",
+        )
+        return response.get("articles", [])
+    except Exception as e:
+        return {"error": str(e)}

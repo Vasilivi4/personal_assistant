@@ -15,13 +15,13 @@
         <title>Weather Widget</title>
     </head>
     <body>
+        <h1>Свяжитесь</h1>
         <p class="titul">
             <img src="{% static 'images/assistant.png' %}">
         </p>
         {% block content %}
         <div class="container mt-5">
-            <!-- Кнопка для перехода на страницу "Свяжитесь с нами" -->
-            <a href="{% url 'contact_us' %}">Свяжитесь с
+             <a href="{% url 'contact_us' %}">Свяжитесь с
                 нами</a>
         </div>
         {% endblock %}

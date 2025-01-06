@@ -1,13 +1,9 @@
 body {
     background-image: url('/static/images/logo.jpg');
     background-size: cover;
-    /* Растягивает картинку на весь экран */
     background-attachment: fixed;
-    /* Фиксирует картинку при прокрутке */
     background-position: center;
-    /* Центрирует картинку */
     background-repeat: no-repeat;
-    /* Отключает повторение картинки */
 
     margin: 0;
     font-family: var(--bs-body-font-family);
@@ -20,7 +16,13 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
+form {
+    background: rgba(255, 253, 253, 0.479);
+}
 
+ul {
+    background: rgba(255, 253, 253, 0.479);
+}
 .titul {
     text-align: center !important;
     padding-top: 150px;
@@ -28,13 +30,11 @@ body {
 
 .container {
     padding-top: 10px;
-    /* Отступ сверху */
 }
 
 .menu {
     padding-top: 150px;
     padding-right: 3rem !important;
-    /* Отступ сверху */
 }
 
 .bg-lighter {
@@ -44,8 +44,7 @@ body {
 
 .navbar {
     background: rgba(255, 253, 253, 0.479);
-    /* Прозрачный фон */
-  
+
 }
 
 .card {
@@ -98,4 +97,8 @@ body {
 
 .knopka {
     background: rgba(142, 152, 74, 0.6);
+}
+
+h1 {
+    color: #000;
 }

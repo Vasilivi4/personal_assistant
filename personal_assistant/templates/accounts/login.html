@@ -3,36 +3,34 @@
 {% block content %}
 
 {% if messages %}
-<div class="container bg-lighter">
+<div>
     {% for message in messages %}
-    <div class="alert {% if message.tags %} alert-{{ message.tags }} {% endif %} p-2">
-        {{ message }}
-    </div>
+    <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
     {% endfor %}
 </div>
 {% endif %}
 
-<div class="container bg-lighter card">
-    <h2 class="titul">Login</h2>
-    
-    <form action="{% url 'accounts:login' %}" method="post" class="p-4">
-        {% csrf_token %}
-
-        <div class="mb-3">
-            <label class="form-label d-block">Username:</label>
+<form action="{% url 'accounts:login' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <label> Username:
             {{ form.username }}
-        </div>
+        </label>
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label d-block">Password:</label>
+    <div>
+        <label>Password:
             {{ form.password }}
-        </div>
+        </label>
+    </div>
 
-        <div class="text-centers">
-            <button type="submit" class="btn knopka">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-        </div>
-    </form>
-</div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+    <div class="small text-center">
+        <a href="{% url 'accounts:reset-password' %}" class="text-center"><i>Forgot Password?</i></a>
+    </div>
+</form>
 
 {% endblock %}

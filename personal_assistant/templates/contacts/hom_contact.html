@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% csrf_token %}
+<div class="container mt-5">
+    <h1 class="text-center">Контакти</h1>
+
+    <!-- Пошук контактів -->
+    <div class="mt-4">
+        <h2>Пошук контактів</h2>
+        <form method="GET" class="d-flex mb-3">
+            <div class="form-group flex-grow-1 me-2">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-success">Пошук</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Нагадування про день народження -->
+    <div>
+        <h2>Нагадування про день народження</h2>
+        {% if birthday_contacts %}
+        <ul class="list-group mb-3">
+            {% for contact in birthday_contacts %}
+            <li class="list-group-item">
+                {{ contact.name }} - день народження {{ contact.birthday|date:"d.m.Y" }}!
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">Немає контактів з днями народження найближчим часом.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <!-- Список контактів -->
+    <div>
+        <h2>Список контактів</h2>
+        {% if contacts %}
+        <ul class="list-group">
+            {% for contact in contacts %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <strong>{{ contact.name }}</strong> - {{ contact.phone }}
+                </span>
+                <div>
+                    <a href="{% url 'contacts:contact_edit' contact.pk %}" class="btn btn-warning btn-sm">Редагувати</a>
+                    <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-sm">Видалити</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">Список контактів порожній.</p>
+        {% endif %}
+    </div>
+
+    <!-- Кнопка додавання нового контакту -->
+    <div class="mt-4">
+        <a href="{% url 'contacts:contact_create' %}" class="btn btn-success">Додати новий контакт</a>
+    </div>
+
+    <!-- Кнопка повернення на головну сторінку -->
+    <div class="text-center mt-4">
+        <a href="{% url 'news:index' %}" class="btn btn-primary">На головну</a>
+    </div>
+</div>
+{% else %}
+<div>
+    <p>Ви не авторизовані. Будь ласка, авторизуйтесь для доступу до цієї сторінки.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Авторизуватись</a>
+</div>
+{% endif %}
+{% endblock %}

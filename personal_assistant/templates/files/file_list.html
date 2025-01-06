@@ -1,0 +1,32 @@
+{% extends "base.html" %}  <!-- Здесь замените "base.html" на ваш базовый шаблон -->
+
+{% block content %}
+
+<h1>Список файлов</h1>
+<form method="get">
+    <select name="category">
+        <option value="all" {% if category == "all" %}selected{% endif %}>Все</option>
+        <option value="image" {% if category == "image" %}selected{% endif %}>Изображения</option>
+        <option value="document" {% if category == "document" %}selected{% endif %}>Документы</option>
+        <option value="video" {% if category == "video" %}selected{% endif %}>Видео</option>
+        <option value="other" {% if category == "other" %}selected{% endif %}>Другое</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Фильтровать</button>
+</form>
+
+<ul>
+    {% for file in files %}
+    <li>
+        {{ file.file.name }} ({{ file.category }})
+    </li>
+    {% empty %}
+    <li>Файлы не найдены.</li>
+    {% endfor %}
+</ul>
+
+<div class="text-center mt-3">
+    <a href="{% url 'news:index' %}" class="btn btn-primary">На главную</a>
+</div>
+
+<a href="{% url 'files:upload_file' %}" class="btn btn-primary">Загрузить файл</a>
+{% endblock %}
