@@ -6,22 +6,29 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 from .forms import RegisterForm, LoginForm
 
 
 def signupuser(request):
-    """Function signupuser printing python version."""
+    """Function signupuser with username existence check."""
     if request.user.is_authenticated:
         return redirect(to='news:index')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(to='news:index')
-        else:
-            return render(request, 'accounts/signup.html', {'form': form})
+            email = form.cleaned_data.get('email')
+            if User.objects.filter(email=email).exists():
+                form.add_error('email', 'Користувач із такою електронною поштою вже існує.')
+            username = form.cleaned_data.get('username')
+            if User.objects.filter(username=username).exists():
+                form.add_error('username', 'Користувач із таким іменем уже існує.')
+            else:
+                form.save()
+                return redirect(to='news:index')
+        return render(request, 'accounts/signup.html', {'form': form})
 
     return render(request, 'accounts/signup.html', context={'form': RegisterForm()})
 
