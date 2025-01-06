@@ -1,21 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Note, Tag
-from django import forms
-
-
-class NoteForm(forms.ModelForm):
-    new_tag = forms.CharField(
-        required=False,
-        label="Add New Tag",
-        widget=forms.TextInput(attrs={"placeholder": "Enter new tag name"}),
-    )
-
-    class Meta:
-        model = Note
-        fields = ["title", "content", "tags"]
-        widgets = {"tags": forms.CheckboxSelectMultiple()}
-
+from django.http import JsonResponse
+from .forms import NoteForm
 
 def note_list(request):
     notes = Note.objects.all()
@@ -93,5 +80,11 @@ def tag_create(request):
     if request.method == "POST":
         name = request.POST.get("name")
         if name:
-            Tag.objects.create(name=name)
-    return redirect("notes:note_list")
+            # Check if tag exists (case insensitive)
+            if Tag.objects.filter(name__iexact=name).exists():
+                return JsonResponse({"success": False, "error": "Tag already exists"})
+            tag = Tag.objects.create(name=name)
+            return JsonResponse(
+                {"success": True, "tag": {"id": tag.id, "name": tag.name}}
+            )
+    return JsonResponse({"success": False, "error": "Invalid request"})
