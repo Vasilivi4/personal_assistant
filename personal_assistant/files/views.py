@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import File
-from .forms import FileUploadForm
+from files.models import File
+from files.forms import FileUploadForm
 import logging
 
 logger = logging.getLogger(__name__)
