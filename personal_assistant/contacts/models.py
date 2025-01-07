@@ -9,14 +9,13 @@ class Contact(models.Model):
     phone = models.CharField(
         max_length=15,
         validators=[
-            RegexValidator(r"^\+?1?\d{9,15}$", "Некоректний формат номера телефону")
+            RegexValidator(r"^\+?1?\d{9,15}$", "Invalid phone number format")
         ],
     )
-    email = models.EmailField(validators=[EmailValidator("Некоректний формат email")])
+    email = models.EmailField(validators=[EmailValidator("Invalid email format")])
     birthday = models.DateField(blank=True, null=True,
-                                help_text="Введіть дату у форматі РРРР-ММ-ДД, наприклад, 2000-01-01")
+                                help_text="Enter the date in YYYY-MM-DD format, e.g., 2000-01-01")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
 
     def __str__(self):
         return self.name

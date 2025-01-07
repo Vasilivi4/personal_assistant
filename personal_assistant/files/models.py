@@ -3,10 +3,10 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 CATEGORY_CHOICES = [
-    ('image', 'Зображення'),
-    ('document', 'Документ'),
-    ('video', 'Відео'),
-    ('other', 'Інше'),
+    ('image', 'Image'),
+    ('document', 'Document'),
+    ('video', 'Video'),
+    ('other', 'Other'),
 ]
 
 class File(models.Model):

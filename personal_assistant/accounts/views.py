@@ -1,4 +1,4 @@
-"""Module providing a function printing python version."""
+"""Module providing a function for user registration and login."""
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
@@ -23,9 +23,9 @@ def signupuser(request):
             username = form.cleaned_data.get('username')
 
             if User.objects.filter(email=email).exists():
-                form.add_error('email', 'Користувач із такою електронною поштою вже існує.')
+                form.add_error('email', 'A user with this email already exists.')
             if User.objects.filter(username=username).exists():
-                form.add_error('username', 'Користувач із таким іменем вже існує.')
+                form.add_error('username', 'A user with this username already exists.')
 
             if form.errors:
                 return render(request, 'accounts/signup.html', {'form': form})
@@ -33,7 +33,7 @@ def signupuser(request):
             user = form.save()
             login(request, user)
 
-            messages.success(request, 'Ви успішно зареєстровані та увійшли в систему.')
+            messages.success(request, 'You have successfully registered and logged in.')
 
             return redirect(to='news:index')
         else:
@@ -43,7 +43,7 @@ def signupuser(request):
 
 
 def loginuser(request):
-    """Function loginuser printing python version."""
+    """Function loginuser with authentication and error handling."""
     if request.user.is_authenticated:
         return redirect(to='news:index')
 
@@ -53,11 +53,11 @@ def loginuser(request):
         user = authenticate(username=username, password=password)
 
         if user is None:
-            messages.error(request, 'Невірне ім\'я користувача або пароль')
+            messages.error(request, 'Invalid username or password')
             return redirect(to='accounts:login')
 
         login(request, user)
-        messages.success(request, 'Вітаємо, ви успішно увійшли в систему.')
+        messages.success(request, 'Welcome, you have successfully logged in.')
         return redirect(to='news:index')
 
     return render(request, 'accounts/login.html', context={'form': LoginForm()})
@@ -65,13 +65,13 @@ def loginuser(request):
 
 @login_required
 def logoutuser(request):
-    """Function loginuser printing python version."""
+    """Function logoutuser with user logout handling."""
     logout(request)
     return redirect(to='news:index')
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    """Class ResetPasswordView printing python version."""
+    """Class ResetPasswordView for handling password reset."""
     template_name = 'accounts/password_reset.html'
     email_template_name = 'accounts/password_reset_email.html'
     html_email_template_name = 'accounts/password_reset_email.html'

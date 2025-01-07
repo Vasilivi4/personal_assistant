@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">{{ form.instance.pk|default:"Створити новий контакт" }}</h1>
+    <h1 class="text-center">{{ form.instance.pk|default:"Create New Contact" }}</h1>
 
     <form method="POST" class="mt-4">
         {% csrf_token %}
         <div class="mb-3">
             {{ form.as_p }}
         </div>
-        <button type="submit" class="btn btn-success">Зберегти</button>
-        <a href="{% url 'contacts:contacts' %}" class="btn btn-secondary">Скасувати</a>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'contacts:contacts' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}

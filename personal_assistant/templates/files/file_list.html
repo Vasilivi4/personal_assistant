@@ -1,36 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-<h2>Список файлів</h2>
+<h2>File List</h2>
 <div>
-    <a href="{% url 'files:file_upload' %}">Завантажити новий файл</a>
+    <a href="{% url 'files:file_upload' %}">Upload a New File</a>
 </div>
 <div>
     <form method="get">
         <select name="category">
-            <option value="">Всі категорії</option>
-            <option value="image">Зображення</option>
-            <option value="document">Документи</option>
-            <option value="video">Відео</option>
-            <option value="other">Інше</option>
+            <option value="">All Categories</option>
+            <option value="image">Images</option>
+            <option value="document">Documents</option>
+            <option value="video">Videos</option>
+            <option value="other">Other</option>
         </select>
-        <button type="submit">Фільтрувати</button>
+        <button type="submit">Filter</button>
     </form>
 </div>
 <ul>
     {% for file in files %}
         <li>
             {{ file.name }} ({{ file.get_category_display }}) -
-            <a href="{{ file.file.url }}" target="_blank">Завантажити</a>
+            <a href="{{ file.file.url }}" target="_blank">Download</a>
         </li>
     {% empty %}
-        <li>Файли не знайдено.</li>
+        <li>No files found.</li>
     {% endfor %}
 </ul>
 {% else %}
 <div>
-    <p>Ви не авторизовані. Будь ласка, авторизуйтесь для доступу до цієї сторінки.</p>
-    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Авторизуватись</a>
+    <p>You are not logged in. Please log in to access this page.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Login</a>
 </div>
 {% endif %}
 {% endblock %}

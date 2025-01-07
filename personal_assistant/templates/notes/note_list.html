@@ -63,8 +63,8 @@
 </div>
 {% else %}
 <div>
-    <p>Ви не авторизовані. Будь ласка, авторизуйтесь для доступу до цієї сторінки.</p>
-    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Авторизуватись</a>
+    <p>You are not authenticated. Please log in to access this page.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Log In</a>
 </div>
 {% endif %}
 {% endblock %}

@@ -10,36 +10,33 @@ from news.models import News
 from news.services import NewsService
 from news.weather_service import WeatherAPI
 
-
 load_dotenv(dotenv_path=".env")
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
-
-
 def news_list(request):
     """Function news_list printing python version."""
     categories = [
-        {"key": "finance", "name": "Финансы", "api_category": "business"},
-        {"key": "sports", "name": "Спорт", "api_category": "sports"},
-        {"key": "technology", "name": "Технологии", "api_category": "technology"},
-        {"key": "health", "name": "Здоровье", "api_category": "health"},
-        {"key": "entertainment", "name": "Развлечения", "api_category": "entertainment"},
+        {"key": "finance", "name": "Finance", "api_category": "business"},
+        {"key": "sports", "name": "Sports", "api_category": "sports"},
+        {"key": "technology", "name": "Technology", "api_category": "technology"},
+        {"key": "health", "name": "Health", "api_category": "health"},
+        {"key": "entertainment", "name": "Entertainment", "api_category": "entertainment"},
     ]
 
     selected_category = request.GET.get("category")
     category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
     api_category = category_mapping.get(selected_category)
 
-    # Если в базе есть записи, используем их
+    # If there are records in the database, use them
     if News.objects.exists():
         if selected_category:
             news = News.objects.filter(category=selected_category)
         else:
             news = News.objects.all()
     else:
-        # Иначе загружаем из внешнего сервиса
+        # Otherwise, load from the external service
         service = NewsService(api_key=settings.NEWS_API_KEY)
         if api_category:
             news = service.fetch_news(category=api_category)
@@ -54,19 +51,15 @@ def news_list(request):
 
     return render(request, "news/news_list.html", context)
 
-
-
 def news_sources(request):
     """Function news_sources printing python version."""
     service = NewsService(api_key=NEWS_API_KEY)
     sources = service.fetch_sources()
 
-
     context = {
         "sources": sources,
     }
     return render(request, "news/news_sources.html", context)
-
 
 def get_top_headlines():
     """Function get_top_headlines printing python version."""
@@ -77,7 +70,6 @@ def get_top_headlines():
         language="en",
         country="us",
     )
-
 
 def get_all_articles():
     """Function get_all_articles printing python version."""
@@ -92,11 +84,9 @@ def get_all_articles():
         page=2,
     )
 
-
 def get_sources():
     """Function get_sources printing python version."""
     return newsapi.get_sources()
-
 
 def news_view(request):
     """Function news_view printing python version."""
@@ -107,10 +97,9 @@ def news_view(request):
 
     return render(request, "news/news_list.html", {"news": news})
 
-
 def weather_widget_view(request):
     """Function weather_widget_view."""
-    city = request.GET.get("city", "Киев")
+    city = request.GET.get("city", "Kyiv")
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
@@ -120,9 +109,6 @@ def weather_widget_view(request):
         {"weather_data": weather_data, "city": city},
     )
 
-
-
-
 def fetch_rates(self):
     """Function fetch_rates printing python version."""
     try:
@@ -130,11 +116,10 @@ def fetch_rates(self):
         response.raise_for_status()
         data = response.json()
 
-
         rates = data.get('rates', {})
 
-        usd_to_eur = rates.get('EUR', 'Не доступно')
-        usd_to_gbp = rates.get('GBP', 'Не доступно')
+        usd_to_eur = rates.get('EUR', 'Not available')
+        usd_to_gbp = rates.get('GBP', 'Not available')
 
         return {
             'USD to EUR': usd_to_eur,
@@ -142,7 +127,7 @@ def fetch_rates(self):
         }
 
     except requests.exceptions.RequestException as e:
-        return {'error': f"Ошибка при получении данных: {e}"}
+        return {'error': f"Error fetching data: {e}"}
 
 def contact_us(request):
     """Function contact_us printing python version."""
@@ -154,7 +139,7 @@ def terms_and_conditions(request):
 
 def index(request):
     """Function index printing python version."""
-    city = "Киев"
+    city = "Kyiv"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 

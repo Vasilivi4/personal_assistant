@@ -14,7 +14,7 @@ class GeoService:
             }
             response = requests.get(self.base_url, params=params)
             response.raise_for_status()
-            return response.json()  # Возвращает координаты (lat, lon)
+            return response.json()  # Returns coordinates (lat, lon)
         except requests.RequestException as e:
-            print(f"Ошибка запроса: {e}")
+            print(f"Request error: {e}")
             return {"error": str(e)}

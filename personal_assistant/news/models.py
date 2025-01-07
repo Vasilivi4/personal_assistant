@@ -19,11 +19,11 @@ class NewsSummary(models.Model):
 class News(models.Model):
     """Class News representing a person"""
     CATEGORY_CHOICES = [
-        ('finance', 'Финансы'),
-        ('sports', 'Спорт'),
-        ('technology', 'Технологии'),
-        ('health', 'Здоровье'),
-        ('entertainment', 'Развлечения'),
+        ('finance', 'Finance'),
+        ('sports', 'Sports'),
+        ('technology', 'Technology'),
+        ('health', 'Health'),
+        ('entertainment', 'Entertainment'),
     ]
 
     title = models.CharField(max_length=255)
@@ -40,4 +40,3 @@ class News(models.Model):
         """__str__ returns <type 'str'>"""
         self.title = self.title
         return self.title
-    

@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="text-center mb-4">Ежедневное Сводное Обзор</h1>
+    <h1 class="text-center mb-4">Daily Summary Overview</h1>
 
-    <h3>Новости:</h3>
+    <h3>News:</h3>
     <ul class="list-group">
         {% for item in news %}
         <li class="list-group-item">
@@ -16,7 +16,7 @@
         {% endfor %}
     </ul>
 
-    <h3 class="mt-4">Курсы валют:</h3>
+    <h3 class="mt-4">Currency Rates:</h3>
     <ul class="list-group">
         {% for key, value in rates.items %}
         <li class="list-group-item">
