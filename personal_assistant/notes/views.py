@@ -25,33 +25,28 @@ def note_list(request):
 @login_required
 def note_create(request):
     if request.method == "POST":
-        form = NoteForm(request.POST)
+        form = NoteForm(request.POST, user=request.user)
         if form.is_valid():
-            # Handle new tag creation
-            new_tag_name = form.cleaned_data.get("new_tag")
-            if new_tag_name:
-                tag, created = Tag.objects.get_or_create(name=new_tag_name)
-                if created:
-                    form.data = form.data.copy()
-                    form.data.setlist("tags", list(form.data.getlist("tags")) + [str(tag.id)])
-
-            form.save()
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+            form.save_m2m()  # Save tags
             return redirect("notes:note_list")
     else:
-        form = NoteForm()
+        form = NoteForm(user=request.user)
     return render(request, "notes/note_form.html", {"form": form, "action": "Create"})
 
 
 @login_required
 def note_edit(request, pk):
-    note = get_object_or_404(Note, pk=pk)
+    note = get_object_or_404(Note, pk=pk, user=request.user)
     if request.method == "POST":
-        form = NoteForm(request.POST, instance=note)
+        form = NoteForm(request.POST, instance=note, user=request.user)
         if form.is_valid():
             form.save()
             return redirect("notes:note_list")
     else:
-        form = NoteForm(instance=note)
+        form = NoteForm(instance=note, user=request.user)
     return render(
         request, "notes/note_form.html", {"form": form, "note": note, "action": "Edit"}
     )
@@ -75,15 +70,16 @@ def tag_list(request):
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, "notes/tag_list.html", {"tags": tags})
 
+
 @login_required
 def tag_create(request):
     if request.method == "POST":
         name = request.POST.get("name")
         if name:
-            # Check if tag exists (case insensitive)
-            if Tag.objects.filter(name__iexact=name).exists():
+            # Check if tag exists for this user (case insensitive)
+            if Tag.objects.filter(name__iexact=name, user=request.user).exists():
                 return JsonResponse({"success": False, "error": "Tag already exists"})
-            tag = Tag.objects.create(name=name)
+            tag = Tag.objects.create(name=name, user=request.user)
             return JsonResponse(
                 {"success": True, "tag": {"id": tag.id, "name": tag.name}}
             )
