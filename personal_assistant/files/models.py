@@ -15,6 +15,7 @@ class UploadedFile(models.Model):
     file = models.FileField(upload_to='uploads/')
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    public_url = models.URLField(blank=True, null=True)
     
     def save(self, *args, **kwargs):
         if not self.category or self.category == 'other':
