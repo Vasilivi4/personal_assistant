@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ action }} Note</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">{{ form.title.label_tag }} {{ form.title }}</div>
+    <div class="mb-3">{{ form.content.label_tag }} {{ form.content }}</div>
+    <div class="mb-3">
+        {{ form.tags.label_tag }} {{ form.tags }}
+        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="showTagForm()">Add New Tag</button>
+    </div>
+    
+    <!-- Hidden Tag Form -->
+    <div id="tagFormSection" class="mb-3" style="display: none;">
+        <div class="card p-3">
+            <h5>Create New Tag</h5>
+            <div id="tagError" class="alert alert-danger" style="display: none;"></div>
+            <div class="input-group">
+                <input type="text" id="newTagName" class="form-control" placeholder="Enter tag name">
+                <button type="button" class="btn btn-success" onclick="createTag()">Add Tag</button>
+                <button type="button" class="btn btn-secondary" onclick="hideTagForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script>
+function showTagForm() {
+    document.getElementById('tagFormSection').style.display = 'block';
+    document.getElementById('tagError').style.display = 'none';
+}
+
+function hideTagForm() {
+    document.getElementById('tagFormSection').style.display = 'none';
+    document.getElementById('newTagName').value = '';
+    document.getElementById('tagError').style.display = 'none';
+}
+
+function createTag() {
+    const tagName = document.getElementById('newTagName').value;
+    if (!tagName) return;
+
+    fetch('{% url "notes:tag_create" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: `name=${encodeURIComponent(tagName)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const tagsDiv = document.querySelector('#id_tags');
+            const newCheckbox = document.createElement('div');
+            newCheckbox.innerHTML = `
+                <label>
+                    <input type="checkbox" name="tags" value="${data.tag.id}" checked>
+                    ${data.tag.name}
+                </label>`;
+            tagsDiv.appendChild(newCheckbox);
+            hideTagForm();
+        } else {
+            const errorDiv = document.getElementById('tagError');
+            errorDiv.textContent = data.error || 'Failed to create tag';
+            errorDiv.style.display = 'block';
+        }
+    });
+}
+</script>
+
+{% endblock %}

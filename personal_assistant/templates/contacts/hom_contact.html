@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% csrf_token %}
+<div class="container mt-5">
+    <h1 class="text-center">Contacts</h1>
+
+    <!-- Contact search -->
+    <div class="mt-4">
+        <h2>Search Contacts</h2>
+        <form method="GET" class="d-flex mb-3">
+            <div class="form-group flex-grow-1 me-2">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Birthday reminders -->
+    <div>
+        <h2>Birthday Reminders</h2>
+        {% if birthday_contacts %}
+        <ul class="list-group mb-3">
+            {% for contact in birthday_contacts %}
+            <li class="list-group-item">
+                {{ contact.name }} - birthday on {{ contact.birthday|date:"d.m.Y" }}!
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No contacts with birthdays coming up soon.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <!-- Contact list -->
+    <div>
+        <h2>Contact List</h2>
+        {% if contacts %}
+        <ul class="list-group">
+            {% for contact in contacts %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <strong>{{ contact.name }}</strong> - {{ contact.phone }}
+                </span>
+                <div>
+                    <a href="{% url 'contacts:contact_edit' contact.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">The contact list is empty.</p>
+        {% endif %}
+    </div>
+
+    <!-- Add new contact button -->
+    <div class="mt-4">
+        <a href="{% url 'contacts:contact_create' %}" class="btn btn-success">Add New Contact</a>
+    </div>
+
+    <!-- Return to homepage button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'news:index' %}" class="btn btn-primary">Go to Homepage</a>
+    </div>
+</div>
+{% else %}
+<div>
+    <p>You are not logged in. Please log in to access this page.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Login</a>
+</div>
+{% endif %}
+{% endblock %}

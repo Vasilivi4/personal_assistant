@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Tags</h2>
+        <form method="POST" action="{% url 'notes:tag_create' %}" class="mb-4">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="name" class="form-control" placeholder="New tag name">
+                <button type="submit" class="btn btn-primary">Add Tag</button>
+            </div>
+        </form>
+        
+        <div class="list-group">
+            {% for tag in tags %}
+                <div class="list-group-item">{{ tag.name }}</div>
+            {% empty %}
+                <p>No tags found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

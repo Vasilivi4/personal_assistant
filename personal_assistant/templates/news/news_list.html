@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">News</h1>
+
+    <!-- Filter by categories -->
+    <div class="text-center mb-4">
+        <a href="?category=general" class="btn btn-primary">General</a>
+        <a href="?category=finance" class="btn btn-primary">Finance</a>
+        <a href="?category=sports" class="btn btn-primary">Sports</a>
+        <a href="?category=technology" class="btn btn-primary">Technology</a>
+        <a href="?category=health" class="btn btn-primary">Health</a>
+        <a href="?category=entertainment" class="btn btn-primary">Entertainment</a>
+        <!-- Button to return to the homepage -->
+        <div class="text-center mt-3">
+            <a href="{% url 'news:index' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+    <!-- Display news list as cards -->
+    <div class="row">
+        {% for item in news %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ item.image_url }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a href="{{ item.url }}" class="btn btn-primary" target="_blank">Read more</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

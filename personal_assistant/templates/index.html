@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="weather-widget">
+    <h2>Weather in {{ city }}</h2>
+    {% include "news/weather_widget.html" %}
+</div>
+
+{% endblock %}

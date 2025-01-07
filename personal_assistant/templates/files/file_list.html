@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>File List</h2>
+<div>
+    <a href="{% url 'files:file_upload' %}">Upload a New File</a>
+</div>
+<div>
+    <form method="get">
+        <select name="category">
+            <option value="">All Categories</option>
+            <option value="image">Images</option>
+            <option value="document">Documents</option>
+            <option value="video">Videos</option>
+            <option value="other">Other</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<ul>
+    {% for file in files %}
+        <li>
+            {{ file.name }} ({{ file.get_category_display }}) -
+            <a href="{{ file.file.url }}" target="_blank">Download</a>
+        </li>
+    {% empty %}
+        <li>No files found.</li>
+    {% endfor %}
+</ul>
+{% else %}
+<div>
+    <p>You are not logged in. Please log in to access this page.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Login</a>
+</div>
+{% endif %}
+{% endblock %}
