@@ -5,7 +5,6 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def index(request):
     form = ContactSearchForm(request.GET)
     contacts = Contact.objects.filter(user=request.user).all() if request.user.is_authenticated else []

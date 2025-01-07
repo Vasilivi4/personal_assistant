@@ -4,101 +4,71 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-
     margin: 0;
     font-family: var(--bs-body-font-family);
-    font-size: var(--bs-body-font-size);
-    font-weight: var(--bs-body-font-weight);
-    line-height: var(--bs-body-line-height);
     color: #2379cf;
     text-align: var(--bs-body-text-align);
-    background-color: var(--bs-body-bg);
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-}
-form {
-    background: rgba(255, 253, 253, 0.479);
-}
-
-ul {
-    background: rgba(255, 253, 253, 0.479);
-}
-.titul {
-    text-align: center !important;
-    padding-top: 150px;
 }
 
 .container {
-    padding-top: 10px;
-}
-
-.menu {
-    padding-top: 150px;
-    padding-right: 3rem !important;
-}
-
-.bg-lighter {
-
-    background: rgba(255, 253, 253, 0.479);
-}
-
-.navbar {
-    background: rgba(255, 253, 253, 0.479);
-
-}
-
-.card {
-
-    background: rgba(255, 253, 253, 0.479);
-}
-
-.text-centers {
-    padding-top: 1px;
-    text-align: center !important;
-}
-
-.d-block {
-    color: #2379cf;
-}
-
-.list-group {
     padding-top: 50px;
 }
 
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
-    color: var(--bs-list-group-color);
-    text-decoration: none;
-    background: rgba(255, 253, 253, 0.6);
-    border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+h2 {
+    color: #333;
+    margin-bottom: 30px;
 }
 
-.register {
-
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    width: 200px;
-    z-index: 1000;
+.form-container {
+    background: rgba(255, 253, 253, 0.85);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-    background: rgba(255, 253, 253, 0.6);
-
+.form-group {
+    margin-bottom: 15px;
 }
 
-.sign {
-    background: rgba(255, 253, 253, 0.6);
-    margin-left: 30px;
-
+.form-group label {
+    font-weight: bold;
+    color: #333;
 }
 
-.knopka {
-    background: rgba(142, 152, 74, 0.6);
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-h1 {
-    color: #000;
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.d-grid .btn {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.alert-container {
+    margin-bottom: 20px;
+}
+
+.alert {
+    margin-bottom: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+a {
+    color: #2379cf;
+}
+
+a:hover {
+    text-decoration: underline;
 }

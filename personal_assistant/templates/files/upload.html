@@ -1,14 +1,10 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-<h1>Загрузить файл</h1>
+<h2>Завантаження файлу</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Загрузить</button>
+    <button type="submit">Завантажити</button>
 </form>
-<div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">На главную</a>
-</div>
-<a href="{% url 'files:file_list' %}" class="btn btn-primary">Список файлов</a>
+<a href="{% url 'files:file_list' %}">Назад до списку файлів</a>
 {% endblock %}

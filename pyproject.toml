@@ -19,6 +19,8 @@ sqlparse = "^0.5.3"
 typing-extensions = "^4.12.2"
 tzdata = "^2024.2"
 asgiref = "^3.8.1"
+cloudinary = "^1.42.0"
+django-cloudinary-storage = "^0.3.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"

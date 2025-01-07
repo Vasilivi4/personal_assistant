@@ -1,7 +1,8 @@
 from django import forms
-from .models import UserFile
+from .models import File
 
-class UploadFileForm(forms.ModelForm):
+class FileUploadForm(forms.ModelForm):
     class Meta:
-        model = UserFile
-        fields = ['file', 'category']
+        model = File
+        fields = ['name', 'file', 'category']
+

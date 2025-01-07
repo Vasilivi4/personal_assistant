@@ -1,32 +1,36 @@
-{% extends "base.html" %}  <!-- Здесь замените "base.html" на ваш базовый шаблон -->
-
+{% extends "base.html" %}
 {% block content %}
-
-<h1>Список файлов</h1>
-<form method="get">
-    <select name="category">
-        <option value="all" {% if category == "all" %}selected{% endif %}>Все</option>
-        <option value="image" {% if category == "image" %}selected{% endif %}>Изображения</option>
-        <option value="document" {% if category == "document" %}selected{% endif %}>Документы</option>
-        <option value="video" {% if category == "video" %}selected{% endif %}>Видео</option>
-        <option value="other" {% if category == "other" %}selected{% endif %}>Другое</option>
-    </select>
-    <button type="submit" class="btn btn-primary">Фильтровать</button>
-</form>
-
+{% if user.is_authenticated %}
+<h2>Список файлів</h2>
+<div>
+    <a href="{% url 'files:file_upload' %}">Завантажити новий файл</a>
+</div>
+<div>
+    <form method="get">
+        <select name="category">
+            <option value="">Всі категорії</option>
+            <option value="image">Зображення</option>
+            <option value="document">Документи</option>
+            <option value="video">Відео</option>
+            <option value="other">Інше</option>
+        </select>
+        <button type="submit">Фільтрувати</button>
+    </form>
+</div>
 <ul>
     {% for file in files %}
-    <li>
-        {{ file.file.name }} ({{ file.category }})
-    </li>
+        <li>
+            {{ file.name }} ({{ file.get_category_display }}) -
+            <a href="{{ file.file.url }}" target="_blank">Завантажити</a>
+        </li>
     {% empty %}
-    <li>Файлы не найдены.</li>
+        <li>Файли не знайдено.</li>
     {% endfor %}
 </ul>
-
-<div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">На главную</a>
+{% else %}
+<div>
+    <p>Ви не авторизовані. Будь ласка, авторизуйтесь для доступу до цієї сторінки.</p>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Авторизуватись</a>
 </div>
-
-<a href="{% url 'files:upload_file' %}" class="btn btn-primary">Загрузить файл</a>
+{% endif %}
 {% endblock %}

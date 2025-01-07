@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 load_dotenv()
 
@@ -23,7 +25,6 @@ CURRENCY_API_KEY = os.getenv("CURRENCY_API_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -39,7 +40,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
 ]
-
 
 # Application definition
 
@@ -87,7 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -102,7 +101,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 #     }
 # }
 
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DATABASES = {
     "default": {
@@ -125,7 +126,6 @@ EMAIL_HOST_USER = os.getenv("MAIL_FROM")
 EMAIL_HOST_PASSWORD = os.getenv("MAIL_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -144,7 +144,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -156,7 +155,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -167,7 +165,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "stile", "static"),
 ]
 
-
 # Папка для collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
@@ -176,16 +173,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Google Cloud Storage налаштування
-GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'service-account-key.json')
-
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-
-GS_BUCKET_NAME = 'personal-assistant-446316'  # ім'я bucket
-GS_DEFAULT_ACL = 'publicRead'  # відчиненість URL-адреса

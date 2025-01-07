@@ -1,36 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container mt-5">
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-{% if messages %}
-<div>
-    {% for message in messages %}
-    <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
+    <h2 class="text-center">Авторизація</h2>
 
-<form action="{% url 'accounts:login' %}" method="post">
-    {% csrf_token %}
-    <div>
-        <label> Username:
+    <form action="{% url 'accounts:login' %}" method="post" class="form-container">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="id_username">Username</label>
             {{ form.username }}
-        </label>
-    </div>
+        </div>
 
-    <div>
-        <label>Password:
+        <div class="form-group mb-3">
+            <label for="id_password">Password</label>
             {{ form.password }}
-        </label>
-    </div>
+        </div>
 
-    <div class="grid">
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">Reset</button>
-    </div>
-    <div class="small text-center">
-        <a href="{% url 'accounts:reset-password' %}" class="text-center"><i>Forgot Password?</i></a>
-    </div>
-</form>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Увійти</button>
+            <button type="reset" class="btn btn-secondary">Очистити</button>
+        </div>
 
+        <div class="text-center mt-3">
+            <a href="{% url 'accounts:reset-password' %}"><i>Забули пароль?</i></a>
+        </div>
+    </form>
+</div>
 {% endblock %}
