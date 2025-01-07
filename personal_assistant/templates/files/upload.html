@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>File Upload</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
-<a href="{% url 'files:file_list' %}">Back to file list</a>
+<div class="container mt-5">
+    <h2 class="mb-4">File Upload</h2>
+    <form method="post" enctype="multipart/form-data" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Upload</button>
+        <a href="{% url 'files:file_list' %}" class="btn btn-secondary ms-3">Back to file list</a>
+    </form>
+</div>
 {% endblock %}
