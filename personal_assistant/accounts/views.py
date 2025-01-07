@@ -20,17 +20,20 @@ def signupuser(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
+
             if User.objects.filter(email=email).exists():
                 form.add_error('email', 'Користувач із такою електронною поштою вже існує.')
-                return render(request, 'accounts/signup.html', {'form': form})
-
-            username = form.cleaned_data.get('username')
             if User.objects.filter(username=username).exists():
-                form.add_error('username', 'Користувач із таким іменем уже існує.')
+                form.add_error('username', 'Користувач із таким іменем вже існує.')
+
+            if form.errors:
                 return render(request, 'accounts/signup.html', {'form': form})
 
             user = form.save()
             login(request, user)
+
+            messages.success(request, 'Ви успішно зареєстровані та увійшли в систему.')
 
             return redirect(to='news:index')
         else:
@@ -45,12 +48,16 @@ def loginuser(request):
         return redirect(to='news:index')
 
     if request.method == 'POST':
-        user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
         if user is None:
-            messages.error(request, 'Username or password didn\'t match')
+            messages.error(request, 'Невірне ім\'я користувача або пароль')
             return redirect(to='accounts:login')
 
         login(request, user)
+        messages.success(request, 'Вітаємо, ви успішно увійшли в систему.')
         return redirect(to='news:index')
 
     return render(request, 'accounts/login.html', context={'form': LoginForm()})
