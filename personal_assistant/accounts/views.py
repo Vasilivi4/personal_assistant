@@ -29,7 +29,10 @@ def signupuser(request):
                 form.add_error('username', 'Користувач із таким іменем уже існує.')
                 return render(request, 'accounts/signup.html', {'form': form})
 
-            form.save()
+            user = form.save()
+            login(request, user)
+
+
             return redirect(to='news:index')
         else:
             return render(request, 'accounts/signup.html', {'form': form})
