@@ -32,7 +32,6 @@ def signupuser(request):
             user = form.save()
             login(request, user)
 
-
             return redirect(to='news:index')
         else:
             return render(request, 'accounts/signup.html', {'form': form})

@@ -60,8 +60,6 @@ def test_loginuser(client, user):
     assert str(messages[0]) == "Username or password didn't match"
 
 
-
-
 @pytest.mark.django_db
 def test_logoutuser(client, user):
     client.login(username='testuser', password='password123')
