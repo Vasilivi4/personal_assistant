@@ -17,8 +17,8 @@
 
          <div class="register">
     {% if user.is_authenticated %}
-    <ul>
-        <li>Welcome <b>{{ user.username }}!</b></li>
+    <ul class="ull">
+        <li>Welcome <b class="user">{{ user.username }}!</b></li>
         <li><a href="{% url 'accounts:logout' %}" role="button">Logout</a></li>
     </ul>
     {% else %}
