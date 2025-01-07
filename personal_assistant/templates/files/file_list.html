@@ -1,36 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user.is_authenticated %}
-<h2>File List</h2>
-<div>
-    <a href="{% url 'files:file_upload' %}">Upload a New File</a>
+<div class="container mt-5">
+    {% if user.is_authenticated %}
+        <h2 class="mb-4">File List</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{% url 'files:file_upload' %}" class="btn btn-primary">Upload a New File</a>
+            <form method="get" class="form-inline">
+                <select name="category" class="form-select me-2">
+                    <option value="">All Categories</option>
+                    <option value="image" {% if request.GET.category == "image" %}selected{% endif %}>Images</option>
+                    <option value="document" {% if request.GET.category == "document" %}selected{% endif %}>Documents</option>
+                    <option value="video" {% if request.GET.category == "video" %}selected{% endif %}>Videos</option>
+                    <option value="other" {% if request.GET.category == "other" %}selected{% endif %}>Other</option>
+                </select>
+                <button type="submit" class="btn btn-secondary">Filter</button>
+            </form>
+        </div>
+
+        {% if files %}
+            <ul class="list-group">
+                {% for file in files %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>{{ file.name }}</strong> ({{ file.get_category_display }})
+                        </span>
+                        <a href="{{ file.file.url }}" target="_blank" class="btn btn-outline-primary btn-sm">Download</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info mt-4" role="alert">
+                No files found.
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-warning mt-4">
+            <p>You are not logged in. Please log in to access this page.</p>
+            <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+        </div>
+    {% endif %}
 </div>
-<div>
-    <form method="get">
-        <select name="category">
-            <option value="">All Categories</option>
-            <option value="image">Images</option>
-            <option value="document">Documents</option>
-            <option value="video">Videos</option>
-            <option value="other">Other</option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
-</div>
-<ul>
-    {% for file in files %}
-        <li>
-            {{ file.name }} ({{ file.get_category_display }}) -
-            <a href="{{ file.file.url }}" target="_blank">Download</a>
-        </li>
-    {% empty %}
-        <li>No files found.</li>
-    {% endfor %}
-</ul>
-{% else %}
-<div>
-    <p>You are not logged in. Please log in to access this page.</p>
-    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Login</a>
-</div>
-{% endif %}
 {% endblock %}
