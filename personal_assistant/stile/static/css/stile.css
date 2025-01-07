@@ -66,9 +66,21 @@ h2 {
 }
 
 a {
-    color: #2379cf;
+    color: #23cf68;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+.register {
+    color: #222a24;
+}
+
+.user {
+    color: #23cf68;
+}
+
+.ull {
+    font-size: 20px;
 }
