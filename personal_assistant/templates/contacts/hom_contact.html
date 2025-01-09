@@ -6,7 +6,6 @@
 <div class="container mt-5">
     <h1 class="text-center">Contacts</h1>
 
-    <!-- Contact search -->
     <div class="con mt-4">
         <h2>Search Contacts</h2>
         <form method="GET" class="d-flex mb-3">
@@ -18,7 +17,6 @@
 
         <hr>
 
-        <!-- Birthday reminders -->
         <div>
             <h2>Birthday Reminders</h2>
             {% if birthday_contacts %}
@@ -37,7 +35,6 @@
 
         <hr>
 
-        <!-- Contact list -->
         <div>
             <h2>Contact List</h2>
             {% if contacts %}
@@ -63,13 +60,11 @@
             {% endif %}
         </div>
 
-        <!-- Add new contact button -->
         <div class="mt-4">
             <a href="{% url 'contacts:contact_create' %}"
                 class="btn btn-success">Add New Contact</a>
         </div>
 
-        <!-- Return to homepage button -->
         <div class="text-center mt-4">
             <a href="{% url 'news:index' %}" class="btn btn-primary">Go to
                 Homepage</a>
