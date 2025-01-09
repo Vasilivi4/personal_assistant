@@ -13,10 +13,16 @@ body {
 .container {
     padding-top: 50px;
 }
+
 .con {
     padding-top: 50px;
     background: rgba(255, 253, 253, 0.85);
 }
+
+.container_mit {
+    background: rgba(255, 253, 253, 0.534);
+}
+
 h2 {
     color: #333;
     margin-bottom: 30px;
