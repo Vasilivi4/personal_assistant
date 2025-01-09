@@ -1,3 +1,3 @@
-from django.contrib import admin
+"""Module providing a function printing python version."""
 
-# Register your models here.
+from django.contrib import admin
