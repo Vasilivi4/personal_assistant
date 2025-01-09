@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{{ action }} Note</h2>
-<form method="POST">
+<form method="POST" class="notes">
     {% csrf_token %}
     <div class="mb-3">{{ form.title.label_tag }} {{ form.title }}</div>
     <div class="mb-3">{{ form.content.label_tag }} {{ form.content }}</div>
@@ -12,7 +12,7 @@
     </div>
     
     <!-- Hidden Tag Form -->
-    <div id="tagFormSection" class="mb-3" style="display: none;">
+    <div id="tagFormSection" class="notes mb-3" style="display: none;">
         <div class="card p-3">
             <h5>Create New Tag</h5>
             <div id="tagError" class="alert alert-danger" style="display: none;"></div>
