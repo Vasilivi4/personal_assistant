@@ -36,7 +36,7 @@
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your_username/personal_assistant.git
+git clone https://github.com/Vasilivi4/personal_assistant
 cd personal_assistant
 ```
 
