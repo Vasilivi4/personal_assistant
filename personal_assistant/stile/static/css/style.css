@@ -72,6 +72,11 @@ h2 {
 
 .text-center {
     text-align: center;
+    
+}
+
+.tx {
+    background: rgba(255, 253, 253, 0.85);
 }
 
 a {
@@ -92,4 +97,8 @@ a:hover {
 
 .ull {
     font-size: 23px;
+}
+
+.notes {
+    background: rgba(255, 253, 253, 0.85);
 }
