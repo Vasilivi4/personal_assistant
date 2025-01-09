@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h1 class="text-center">{{ form.instance.pk|default:"Create New Contact" }}</h1>
 
-    <form method="POST" class="mt-4">
+    <form method="POST" class="tx mt-4">
         {% csrf_token %}
         <div class="mb-3">
             {{ form.as_p }}
