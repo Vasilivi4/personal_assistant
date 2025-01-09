@@ -45,7 +45,7 @@ cd personal_assistant
 python -m venv venv
 source venv/bin/activate # For Windows: venv\Scripts\activate
 ```
-3. **Install poety**
+3. **Install poety:**
 ```bash
 poetry init
 poetry install
