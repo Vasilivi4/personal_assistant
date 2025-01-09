@@ -37,15 +37,17 @@ def index(request):
 
 @login_required
 def contact_create(request):
-    """Function contact_create printing python version."""
-    if request.method == "POST":
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("contacts:hom_contacts")
+            contact = form.save(commit=False)
+            contact.user = request.user  # Привязать к текущему пользователю
+            contact.save()
+            return redirect('contacts:contacts')
     else:
         form = ContactForm()
-    return render(request, "contacts/contact_form.html", {"form": form})
+    return render(request, 'contacts/contact_form.html', {'form': form})
+
 
 @login_required
 def contact_edit(request, pk):
