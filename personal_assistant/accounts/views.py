@@ -1,4 +1,5 @@
 """Module providing a function for user registration and login."""
+
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
@@ -7,8 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-
-from .forms import RegisterForm, LoginForm
+from accounts.forms import RegisterForm, LoginForm
 
 
 def signupuser(request):
