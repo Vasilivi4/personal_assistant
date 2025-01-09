@@ -42,7 +42,7 @@ def contact_create(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("contacts:contacts")
+            return redirect("contacts:hom_contacts")
     else:
         form = ContactForm()
     return render(request, "contacts/contact_form.html", {"form": form})
