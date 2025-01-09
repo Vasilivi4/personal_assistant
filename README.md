@@ -77,8 +77,10 @@ Create a `.env` file in the root folder of the project and add the following var
 ```env
 SECRET_KEY=your_secret_key
 DEBUG=True
+NEWS_API_KEY=news_api_key
 ALLOWED_HOSTS=127.0.0.1, localhost
 WEATHER_API_KEY=your_weather_api_key
+CURRENCY_API_KEY=currency_api_key
 ```
 
 ## Deployment
