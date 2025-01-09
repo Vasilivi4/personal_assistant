@@ -81,6 +81,20 @@ NEWS_API_KEY=news_api_key
 ALLOWED_HOSTS=127.0.0.1, localhost
 WEATHER_API_KEY=your_weather_api_key
 CURRENCY_API_KEY=currency_api_key
+
+POSTGRES_DB=testdatabase
+POSTGRES_USER=myuser
+POSTGRES_PASSWORD=mypassword
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+
+MAIL_USERNAME=example@gmail.com
+MAIL_PASSWORD=mail_password
+MAIL_PORT=587
+MAIL_FROM=example@gmail.com
+MAIL_SERVER=smtp.gmail.com
+
+CLOUDINARY_URL=cloudinary://<your_api_key>:<your_api_secret>@name
 ```
 
 ## Deployment
