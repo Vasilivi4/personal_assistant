@@ -1,5 +1,7 @@
+"""Module providing a function printing python version."""
+
 from django.urls import path
-from . import views
+from notes import views
 
 app_name = "notes"
 
