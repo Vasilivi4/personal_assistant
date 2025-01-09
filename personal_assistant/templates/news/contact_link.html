@@ -19,9 +19,13 @@
         <p class="titul">
             <img src="{% static 'images/assistant.png' %}">
         </p>
+        <div class="text-center mt-3">
+            <a href="{% url 'news:index' %}" class="btn btn-primary">Back to
+                Home</a>
+        </div>
         {% block content %}
         <div class="container mt-5">
-             <a href="{% url 'contact_us' %}">Get in touch with us</a>
+            <a href="{% url 'contact_us' %}">Get in touch with us</a>
         </div>
         {% endblock %}
     </body>
