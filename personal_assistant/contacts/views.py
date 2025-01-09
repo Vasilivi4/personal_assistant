@@ -41,7 +41,7 @@ def contact_create(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save(commit=False)
-            contact.user = request.user  # Привязать к текущему пользователю
+            contact.user = request.user
             contact.save()
             return redirect('contacts:contacts')
     else:
