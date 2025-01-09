@@ -29,14 +29,12 @@ def news_list(request):
     category_mapping = {cat["key"]: cat["api_category"] for cat in categories}
     api_category = category_mapping.get(selected_category)
 
-    # If there are records in the database, use them
     if News.objects.exists():
         if selected_category:
             news = News.objects.filter(category=selected_category)
         else:
             news = News.objects.all()
     else:
-        # Otherwise, load from the external service
         service = NewsService(api_key=settings.NEWS_API_KEY)
         if api_category:
             news = service.fetch_news(category=api_category)
