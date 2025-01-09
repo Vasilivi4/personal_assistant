@@ -45,29 +45,30 @@ cd personal_assistant
 python -m venv venv
 source venv/bin/activate # For Windows: venv\Scripts\activate
 ```
+3. **Install poety**
 ```bash
 poetry init
 poetry install
 poetry shell
 ```
 
-3. **Install dependencies:**
+4. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Apply migrations:**
+5. **Apply migrations:**
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-5. **Run the development server:**
+6. **Run the development server:**
 ```bash
 python manage.py runserver
 ```
 
-6. **Open the application in a browser:**
+7. **Open the application in a browser:**
 Go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
 ### Environment variables
