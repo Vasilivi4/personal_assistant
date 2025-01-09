@@ -1,8 +1,9 @@
 """Module providing a function printing python version."""
-from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetCompleteView
 from django.contrib.messages import success
 from django.urls import path
-from .views import signupuser, loginuser, logoutuser, ResetPasswordView, CustomPasswordResetConfirmView
+from accounts.views import signupuser, loginuser, logoutuser, ResetPasswordView, CustomPasswordResetConfirmView
 
 app_name = "accounts"
 

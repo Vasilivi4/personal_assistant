@@ -1,31 +1,32 @@
+"""Module providing a function printing python version."""
+
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Contact
-from .forms import ContactForm, ContactSearchForm
+from contacts.models import Contact
+from contacts.forms import ContactForm, ContactSearchForm
 from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 def index(request):
+    """Function index printing python version."""
     form = ContactSearchForm(request.GET)
     contacts = Contact.objects.filter(user=request.user).all() if request.user.is_authenticated else []
 
-    # Фільтрація контактів за запитом
     if form.is_valid():
         query = form.cleaned_data['query']
         if query:
             contacts = contacts.filter(
-                name__icontains=query  # Пошук за ім'ям
+                name__icontains=query
             ) | contacts.filter(
-                phone__icontains=query  # Пошук за номером телефону
+                phone__icontains=query
             ) | contacts.filter(
-                email__icontains=query  # Пошук за email
+                email__icontains=query
             )
 
-    # Логіка для нагадування про дні народження
     today = timezone.now().date()
     reminder_date = today + timedelta(days=7)
     birthday_contacts = Contact.objects.filter(
-        birthday__range=(today, reminder_date)  # Контакти з днями народження протягом наступних 7 днів
+        birthday__range=(today, reminder_date)
     )
 
     return render(request, 'contacts/hom_contact.html', {
@@ -36,6 +37,7 @@ def index(request):
 
 @login_required
 def contact_create(request):
+    """Function contact_create printing python version."""
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -47,6 +49,7 @@ def contact_create(request):
 
 @login_required
 def contact_edit(request, pk):
+    """Function contact_edit printing python version."""
     contact = get_object_or_404(Contact, pk=pk)
     if request.method == "POST":
         form = ContactForm(request.POST, instance=contact)
@@ -59,8 +62,9 @@ def contact_edit(request, pk):
 
 @login_required
 def contact_delete(request, pk):
+    """Function contact_delete printing python version."""
     contact = get_object_or_404(Contact, pk=pk)
     if request.method == "POST":
         contact.delete()
-        return redirect("contacts:contacts")  # Після видалення перенаправляємо на головну сторінку
+        return redirect("contacts:contacts")
     return render(request, "contacts/contact_confirm_delete.html", {"contact": contact})

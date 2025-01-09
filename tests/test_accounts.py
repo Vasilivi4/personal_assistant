@@ -1,3 +1,5 @@
+"""Module providing a function printing python version."""
+
 import pytest
 from django.urls import reverse
 from django.contrib.auth import get_user_model
@@ -7,16 +9,19 @@ from django.test import Client
 
 @pytest.fixture
 def user():
+    """Function user with username existence check."""
     return get_user_model().objects.create_user(username="testuser", password="password123")
 
 
 @pytest.fixture
 def client():
+    """Function client with username existence check."""
     return Client()
 
 
 @pytest.mark.django_db
 def test_signupuser(client):
+    """Function test_signupuser with username existence check."""
     url = reverse('accounts:signup')
 
     response = client.get(url)
@@ -38,6 +43,7 @@ def test_signupuser(client):
 
 @pytest.mark.django_db
 def test_loginuser(client, user):
+    """Function test_loginuser with username existence check."""
     url = reverse('accounts:login')
 
     response = client.get(url)
@@ -62,6 +68,7 @@ def test_loginuser(client, user):
 
 @pytest.mark.django_db
 def test_logoutuser(client, user):
+    """Function test_logoutuser with username existence check."""
     client.login(username='testuser', password='password123')
     url = reverse('accounts:logout')
     response = client.get(url)
@@ -71,6 +78,7 @@ def test_logoutuser(client, user):
 
 @pytest.mark.django_db
 def test_reset_password(client):
+    """Function test_reset_password with username existence check."""
     url = reverse('accounts:reset-password')
 
     response = client.get(url)

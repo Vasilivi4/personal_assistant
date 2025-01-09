@@ -1,3 +1,5 @@
+"""Module providing a function printing python version."""
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from files.models import File
@@ -8,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def file_list(request):
+    """Function file_list printing python version."""
     category = request.GET.get('category', None)
     if category:
         files = File.objects.filter(user=request.user, category=category).all() if request.user.is_authenticated else []
@@ -17,6 +20,7 @@ def file_list(request):
 
 @login_required
 def file_upload(request):
+    """Function file_upload printing python version."""
     if request.method == 'POST':
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():

@@ -1,8 +1,11 @@
+"""Module providing a function printing python version."""
+
 from django import forms
-from .models import Note, Tag
+from notes.models import Note, Tag
 
 
 class NoteForm(forms.ModelForm):
+    """Class NoteForm representing a person"""
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
@@ -10,5 +13,6 @@ class NoteForm(forms.ModelForm):
             self.fields['tags'].queryset = Tag.objects.filter(user=self.user)
 
     class Meta:
+        """Class Meta representing a person"""
         model = Note
         fields = ['title', 'content', 'tags']

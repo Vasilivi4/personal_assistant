@@ -1,12 +1,15 @@
+"""Module providing a function printing python version."""
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from .models import Note, Tag
+from notes.models import Note, Tag
 from django.http import JsonResponse
-from .forms import NoteForm
+from notes.forms import NoteForm
 from django.contrib.auth.decorators import login_required
 
 
 def note_list(request):
+    """Function note_list printing python version."""
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     query = request.GET.get("q")
@@ -24,6 +27,7 @@ def note_list(request):
 
 @login_required
 def note_create(request):
+    """Function note_create printing python version."""
     if request.method == "POST":
         form = NoteForm(request.POST, user=request.user)
         if form.is_valid():
@@ -39,6 +43,7 @@ def note_create(request):
 
 @login_required
 def note_edit(request, pk):
+    """Function note_edit printing python version."""
     note = get_object_or_404(Note, pk=pk, user=request.user)
     if request.method == "POST":
         form = NoteForm(request.POST, instance=note, user=request.user)
@@ -53,6 +58,7 @@ def note_edit(request, pk):
 
 @login_required
 def note_delete(request, pk):
+    """Function note_delete printing python version."""
     note = get_object_or_404(Note, pk=pk)
     if request.method == "POST":
         note.delete()
@@ -61,22 +67,24 @@ def note_delete(request, pk):
 
 @login_required
 def note_toggle_done(request, pk):
+    """Function note_toggle_done printing python version."""
     note = get_object_or_404(Note, pk=pk)
     note.done = not note.done
     note.save()
     return redirect("notes:note_list")
 
 def tag_list(request):
+    """Function tag_list printing python version."""
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, "notes/tag_list.html", {"tags": tags})
 
 
 @login_required
 def tag_create(request):
+    """Function tag_create printing python version."""
     if request.method == "POST":
         name = request.POST.get("name")
         if name:
-            # Check if tag exists for this user (case insensitive)
             if Tag.objects.filter(name__iexact=name, user=request.user).exists():
                 return JsonResponse({"success": False, "error": "Tag already exists"})
             tag = Tag.objects.create(name=name, user=request.user)

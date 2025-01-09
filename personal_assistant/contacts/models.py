@@ -1,9 +1,12 @@
+"""Module providing a function printing python version."""
+
 from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
 from django.contrib.auth.models import User
 
 
 class Contact(models.Model):
+    """Class Contact representing a person"""
     name = models.CharField(max_length=100)
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(

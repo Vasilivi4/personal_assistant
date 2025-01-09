@@ -1,7 +1,7 @@
-from django.contrib import admin
-from .models import Note, Tag
+"""Module providing a function printing python version."""
 
-# Register your models here.
+from django.contrib import admin
+from notes.models import Note, Tag
 
 admin.site.register(Note)
 admin.site.register(Tag)

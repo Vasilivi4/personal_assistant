@@ -1,9 +1,10 @@
+"""Module providing a function printing python version."""
+
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-# classes for notes and tags. Each note might have multiple tags
 class Note(models.Model):
+    """Class Note representing a person"""
     title = models.CharField(max_length=100)
     content = models.TextField()
     done = models.BooleanField(default=False)
@@ -11,16 +12,22 @@ class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
+        """__str__ returns <type 'str'>"""
+        self.title = self.title
         return self.title
 
 
 class Tag(models.Model):
+    """Class Tag representing a person"""
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     class Meta:
+        """Class Meta representing a person"""
         constraints = [
             models.UniqueConstraint(fields=['user', 'name'], name='tag of username')
         ]
     def __str__(self):
+        """__str__ returns <type 'str'>"""
+        self.title = self.name
         return self.name
