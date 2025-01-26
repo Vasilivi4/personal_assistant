@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
     <h1 class="text-center mb-4">News Sources</h1>
 
     <div class="text-center mt-3">
@@ -9,9 +8,9 @@
             Home</a>
     </div>
 
-    <ul class="list-group">
+    <ul class="list-group p-4">
         {% for source in sources %}
-        <li class="list-group-item mt-1">
+        <li class="list-group-item mt-3">
             <strong>{{ source.name }}</strong>
             <span class="d-block text-muted">{{ source.description }}</span>
         </li>
@@ -19,5 +18,4 @@
         <li class="list-group-item">No news sources found.</li>
         {% endfor %}
     </ul>
-</div>
 {% endblock %}
