@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+        <h1 class="text-center">Delete Note</h1>
 <div class="card">
     <div class="card-body">
-        <h3>Delete Note</h3>
+
         <p>Are you sure you want to delete "{{ note.title }}"?</p>
         <form method="POST">
             {% csrf_token %}
