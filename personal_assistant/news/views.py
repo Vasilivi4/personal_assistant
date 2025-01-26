@@ -9,11 +9,13 @@ from newsapi import NewsApiClient
 from news.models import News
 from news.services import NewsService
 from news.weather_service import WeatherAPI
+from news.services import upload_images_to_cloudinary
 
 load_dotenv(dotenv_path=".env")
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 newsapi = NewsApiClient(api_key=NEWS_API_KEY)
+
 
 def news_list(request):
     """Function news_list printing python version."""
@@ -22,7 +24,11 @@ def news_list(request):
         {"key": "sports", "name": "Sports", "api_category": "sports"},
         {"key": "technology", "name": "Technology", "api_category": "technology"},
         {"key": "health", "name": "Health", "api_category": "health"},
-        {"key": "entertainment", "name": "Entertainment", "api_category": "entertainment"},
+        {
+            "key": "entertainment",
+            "name": "Entertainment",
+            "api_category": "entertainment",
+        },
     ]
 
     selected_category = request.GET.get("category")
@@ -49,6 +55,7 @@ def news_list(request):
 
     return render(request, "news/news_list.html", context)
 
+
 def news_sources(request):
     """Function news_sources printing python version."""
     service = NewsService(api_key=NEWS_API_KEY)
@@ -59,6 +66,7 @@ def news_sources(request):
     }
     return render(request, "news/news_sources.html", context)
 
+
 def get_top_headlines():
     """Function get_top_headlines printing python version."""
     return newsapi.get_top_headlines(
@@ -68,6 +76,7 @@ def get_top_headlines():
         language="en",
         country="us",
     )
+
 
 def get_all_articles():
     """Function get_all_articles printing python version."""
@@ -82,9 +91,11 @@ def get_all_articles():
         page=2,
     )
 
+
 def get_sources():
     """Function get_sources printing python version."""
     return newsapi.get_sources()
+
 
 def news_view(request):
     """Function news_view printing python version."""
@@ -94,6 +105,7 @@ def news_view(request):
     news = news_service.fetch_news()
 
     return render(request, "news/news_list.html", {"news": news})
+
 
 def weather_widget_view(request):
     """Function weather_widget_view."""
@@ -107,6 +119,7 @@ def weather_widget_view(request):
         {"weather_data": weather_data, "city": city},
     )
 
+
 def fetch_rates(self):
     """Function fetch_rates printing python version."""
     try:
@@ -114,26 +127,29 @@ def fetch_rates(self):
         response.raise_for_status()
         data = response.json()
 
-        rates = data.get('rates', {})
+        rates = data.get("rates", {})
 
-        usd_to_eur = rates.get('EUR', 'Not available')
-        usd_to_gbp = rates.get('GBP', 'Not available')
+        usd_to_eur = rates.get("EUR", "Not available")
+        usd_to_gbp = rates.get("GBP", "Not available")
 
         return {
-            'USD to EUR': usd_to_eur,
-            'USD to GBP': usd_to_gbp,
+            "USD to EUR": usd_to_eur,
+            "USD to GBP": usd_to_gbp,
         }
 
     except requests.exceptions.RequestException as e:
-        return {'error': f"Error fetching data: {e}"}
+        return {"error": f"Error fetching data: {e}"}
+
 
 def contact_us(request):
     """Function contact_us printing python version."""
     return render(request, "news/contact_link.html")
 
+
 def terms_and_conditions(request):
     """Function terms_and_conditions printing python version."""
     return render(request, "news/terms_link.html")
+
 
 def index(request):
     """Function index printing python version."""
@@ -147,6 +163,7 @@ def index(request):
     }
     return render(request, "index.html", context)
 
+
 def fetch_news(self, category=None):
     """Function fetch_news printing python version."""
     try:
@@ -158,3 +175,9 @@ def fetch_news(self, category=None):
         return response.get("articles", [])
     except Exception as e:
         return {"error": str(e)}
+
+
+def photo_gallery(request):
+    image_data = upload_images_to_cloudinary()
+
+    return render(request, "news/contact_link.html", {"image_data": image_data})

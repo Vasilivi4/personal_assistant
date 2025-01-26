@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
     <h1 class="text-center mb-4">News</h1>
 
     <div class="text-center mb-4">
@@ -19,7 +18,7 @@
     </div>
     <div class="row">
         {% for item in news %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4 p-4">
             <div class="card">
                 <img src="{{ item.image_url }}" class="card-img-top">
                 <div class="card-body">
@@ -32,5 +31,4 @@
         </div>
         {% endfor %}
     </div>
-</div>
 {% endblock %}

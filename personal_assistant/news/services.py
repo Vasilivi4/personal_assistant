@@ -5,6 +5,7 @@ import requests
 from django.shortcuts import render
 from django import forms
 from news.models import NewsSummary
+from cloudinary.uploader import upload
 
 
 class CategoryForm(forms.Form):
@@ -108,3 +109,59 @@ def news_list_view(request):
         news = NewsSummary.objects.all().order_by("-date")
 
     return render(request, "news/news_list.html", {"news": news, "form": form})
+
+
+def upload_images_to_cloudinary():
+    image_files = [
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/a8au0jinkf1tmnwoughg.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/ossins6otaiu5nlrduzd.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/zb8zrjp1wxwnwwvqyy3h.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316108/images/jkstojuthylfgymubk03.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/fgggjae2gyozqegdt61i.png",
+    ]
+    descriptions = [
+        "Александр Шевелёв Tim Новини та погода и style.",
+        "Максим Регуш Scram Авторизація та автентифікація и style",
+        "Нікіта Коршомний Dev Нотатки з тегами и style",
+        "Максим Бойчук Dev Вигрузка файлів на хмару и style",
+        "Олег Суслинець Dev Книга контактів и style",
+    ]
+    about_me = [
+        "Привет! Да, у меня действительно много мыслей в голове. Недавно я начал задумываться о своих целях и мечтах на будущее. Я понял, что хочу достичь успеха в своей карьере и стать профессионалом в своей области. Также, я задумался о том, какой я хочу быть человеком и каким вкладом я могу принести в этот мир. Возможно, ты можешь поделиться своими мыслями и опытом по этим вопросам? Наверное, у меня сейчас путаница в голове. Но я постараюсь разобраться и принять решение. Возможно, мне нужно надеть свою самую умную шляпу и придумать план действий. Я не должен забывать быть уверенным и сильным, чтобы преодолеть любые трудности. Возможно, мне пригодится поддержка и одобрение окружающих. Я должен идти вперед и шагать к своей цели.",
+        "About me",
+        "About me",
+        "About me",
+        "About me",
+    ]
+    links = [
+        "https://github.com/Vasilivi4",
+        "https://github.com/Vojdpenguin",
+        "https://github.com/NikKorYT",
+        "https://github.com/Xeljndjhtw",
+        "https://github.com/OlegKan888",
+    ]
+    image_data = []
+
+    for i, image in enumerate(image_files):
+        try:
+            if image.startswith("https://res.cloudinary.com"):
+                print(f"Пропускаем загрузку: {image}")
+                image_data.append(
+                    {
+                        "url": image,
+                        "description": descriptions[i],
+                        "link": links[i],
+                        "about_me": about_me[i],
+                    }
+                )
+            else:
+                result = upload(image, folder="images", resource_type="image")
+                image_url = result["secure_url"]
+                image_data.append(
+                    {"url": image_url, "description": descriptions[i], "link": links[i]}
+                )
+        except Exception as e:
+            print(f"Ошибка при обработке {image}: {e}")
+
+    print(f"Загруженные данные: {image_data}")
+    return image_data

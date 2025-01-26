@@ -6,6 +6,7 @@ class WeatherAPI:
     """Class WeatherAPI representing weather information."""
 
     def __init__(self, api_key):
+        """Class constructor initializing api_key."""
         self.base_url = "http://api.weatherapi.com/v1"
         self.api_key = api_key
 

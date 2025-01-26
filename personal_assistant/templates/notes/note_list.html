@@ -2,9 +2,13 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="row">
+<h1 class="text-center mb-4">Notes list</h1>
+<div class="text-center mt-3">
+    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to
+        Home</a>
+</div>
+<div class="row p-5">
     <div class="col-md-3">
-        <!-- Tags Panel -->
         <div class="card mb-4">
             <div class="card-header">Tags</div>
             <div class="card-body">
@@ -20,8 +24,7 @@
         </div>
     </div>
 
-    <div class="col-md-9">
-        <!-- Search Form -->
+    <div class="opisanie col-md-9 p-5">
         <form method="GET" class="mb-4">
             <div class="input-group">
                 <input type="text" name="q" class="form-control"
@@ -31,9 +34,8 @@
             </div>
         </form>
 
-        <!-- Notes List -->
         <div class="d-flex justify-content-between mb-3">
-            <h2>My Notes</h2>
+            <h1>My Notes</h1>
             <a href="{% url 'notes:note_create' %}" class="btn btn-primary">New
                 Note</a>
         </div>
@@ -69,7 +71,7 @@
             </div>
         </div>
         {% empty %}
-        <p>No notes found.</p>
+        <p class="custom-font">No notes found.</p>
         {% endfor %}
     </div>
 </div>

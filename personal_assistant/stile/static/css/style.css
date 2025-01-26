@@ -12,15 +12,20 @@ body {
 
 .container {
     padding-top: 50px;
+    background: rgba(255, 253, 253, 0.468);
+}
+
+.bg {
+    background: rgba(255, 253, 253, 0.468);
 }
 
 .con {
     padding-top: 50px;
-    background: rgba(255, 253, 253, 0.85);
+    background: rgba(255, 253, 253, 0.468);
 }
 
 .container_mit {
-    background: rgba(255, 253, 253, 0.534);
+    background: rgba(255, 253, 253, 0.468);
 }
 
 h2 {
@@ -29,7 +34,7 @@ h2 {
 }
 
 .form-container {
-    background: rgba(255, 253, 253, 0.85);
+    background: rgba(255, 253, 253, 0.468);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -76,7 +81,7 @@ h2 {
 }
 
 .tx {
-    background: rgba(255, 253, 253, 0.85);
+    background: rgba(255, 253, 253, 0.468);
 }
 
 a {
@@ -100,5 +105,59 @@ a:hover {
 }
 
 .notes {
-    background: rgba(255, 253, 253, 0.85);
+    background: rgba(255, 253, 253, 0.468);
+}
+
+.card {
+    background: rgba(255, 253, 253, 0.468);
+}
+
+.list-group-item {
+    background: rgba(255, 253, 253, 0.468);
+}
+
+.alert {
+    background: rgba(255, 253, 253, 0.468);
+}
+
+.menu {
+    background: rgba(255, 253, 253, 0.468);
+    color: #163525;
+}
+
+.menu-1 {
+    color: #ce1e1e;
+    font-size: 23px;
+}
+
+.opisanie {
+    background: rgba(218, 250, 234, 0.707);
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.CT {
+    color: #000000;
+}
+
+.custom-font {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: #333;
 }

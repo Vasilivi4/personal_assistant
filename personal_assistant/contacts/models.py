@@ -21,4 +21,6 @@ class Contact(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
+        """__str__ returns <type 'str'>"""
+        self.name = self.name
         return self.name

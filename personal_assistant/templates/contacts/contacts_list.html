@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center mb-4">Contact list</h1>
+<div class="text-center mt-3">
+    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to Home</a>
+</div>
+<div class="con ps-5 m-5">
+    <a href="{% url 'contacts:contact_create' %}" class="btn btn-warning btn-sm">Add contact</a>
+
+    <h2>Contacts with upcoming birthdays</h2>
+    <ul>
+        {% for contact in birthday_contacts %}
+        <li>{{ contact.name }}: {{ contact.birthday }}</li>
+        {% empty %}
+        <li>There are no upcoming birthdays.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>All contacts</h2>
+    <form method="get">
+        <input type="text" name="query" placeholder="Search...">
+        <input type="number" name="number" placeholder="Month...">
+        <input type="number" name="days" placeholder="Days...">
+        <button type="submit">Find</button>
+    </form>
+    <ul>
+        {% for contact in contacts %}
+        <li>
+            {{ contact.name }} - {{ contact.phone }} - {{ contact.email }}
+            <div>
+                <a href="{% url 'contacts:contact_edit' contact.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        </li>
+        {% empty %}
+        <li>No contacts</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,49 +1,76 @@
 """Module providing a function printing python version."""
 
-from django.shortcuts import render, redirect, get_object_or_404
+from datetime import timedelta, date
 from contacts.models import Contact
-from contacts.forms import ContactForm, ContactSearchForm
-from datetime import timedelta
-from django.utils import timezone
+from contacts.forms import ContactForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-def index(request):
-    """Function index printing python version."""
-    form = ContactSearchForm(request.GET)
-    contacts = Contact.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+@login_required
+def contacts_list(request):
+    today = date.today()
 
-    if form.is_valid():
-        query = form.cleaned_data['query']
-        if query:
-            contacts = contacts.filter(
-                name__icontains=query
-            ) | contacts.filter(
-                phone__icontains=query
-            ) | contacts.filter(
-                email__icontains=query
-            )
+    # Default end date (7 days from today)
+    default_days = 7
+    end_date = today + timedelta(days=default_days)
 
-    today = timezone.now().date()
-    reminder_date = today + timedelta(days=7)
+    # Get filter parameters
+    query = request.GET.get('query', '')
+    month_number = request.GET.get('number', '')
+    days_left = request.GET.get('days', '')
+
+    # Handle empty or invalid 'days' and 'number' inputs
+    try:
+        days_left = int(days_left) if days_left else default_days
+    except ValueError:
+        days_left = default_days
+
+    try:
+        month_number = int(month_number) if month_number else None
+    except ValueError:
+        month_number = None
+
+    # Filter all contacts
+    contacts = Contact.objects.all()
+
+    if query:
+        contacts = contacts.filter(name__icontains=query)
+
+    # Filter contacts by month
+    if month_number is not None:
+        contacts = contacts.filter(birthday__month=month_number)
+
+    # Filter contacts with upcoming birthdays
+    start_date = today
+    end_date = today + timedelta(days=days_left)
     birthday_contacts = Contact.objects.filter(
-        birthday__range=(today, reminder_date)
+        birthday__month__gte=start_date.month,
+        birthday__day__gte=start_date.day,
+        birthday__month__lte=end_date.month,
+        birthday__day__lte=end_date.day
     )
 
-    return render(request, 'contacts/hom_contact.html', {
-        'contacts': contacts,
-        'form': form,
-        'birthday_contacts': birthday_contacts
-    })
+    # Render contacts to the template
+    return render(
+        request,
+        'contacts/contacts_list.html',
+        {
+            'contacts': contacts,
+            'birthday_contacts': birthday_contacts,
+            'days_left': days_left,
+        }
+    )
 
 @login_required
 def contact_create(request):
+    """Function contact_create printing python version."""
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save(commit=False)
             contact.user = request.user
             contact.save()
-            return redirect('contacts:contacts')
+            return redirect('contacts:contacts_list')
     else:
         form = ContactForm()
     return render(request, 'contacts/contact_form.html', {'form': form})
@@ -57,7 +84,7 @@ def contact_edit(request, pk):
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect("contacts:contacts")
+            return redirect('contacts:contacts_list')
     else:
         form = ContactForm(instance=contact)
     return render(request, "contacts/contact_form.html", {"form": form})
@@ -68,5 +95,5 @@ def contact_delete(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
     if request.method == "POST":
         contact.delete()
-        return redirect("contacts:contacts")
+        return redirect("contacts:contacts_list")
     return render(request, "contacts/contact_confirm_delete.html", {"contact": contact})
