@@ -14,7 +14,7 @@
     <form method="POST" class="mt-4">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger me-2">Yes, delete</button>
-        <a href="{% url 'contacts:contacts' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}
