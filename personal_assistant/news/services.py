@@ -5,6 +5,7 @@ import requests
 from django.shortcuts import render
 from django import forms
 from news.models import NewsSummary
+from cloudinary.uploader import upload
 
 
 class CategoryForm(forms.Form):
@@ -108,3 +109,50 @@ def news_list_view(request):
         news = NewsSummary.objects.all().order_by("-date")
 
     return render(request, "news/news_list.html", {"news": news, "form": form})
+
+
+def upload_images_to_cloudinary():
+    image_files = [
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/a8au0jinkf1tmnwoughg.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/ossins6otaiu5nlrduzd.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/zb8zrjp1wxwnwwvqyy3h.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316108/images/jkstojuthylfgymubk03.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/fgggjae2gyozqegdt61i.png",
+    ]
+    # Список описаний для картинок
+    descriptions = [
+        "Александр Шевелёв Tim Новини та погода и style",
+        "Максим Регуш Scram Авторизація та автентифікація и style",
+        "Нікіта Коршомний Dev Нотатки з тегами и style",
+        "Максим Бойчук Dev Вигрузка файлів на хмару и style",
+        "Олег Суслинець Dev Книга контактів и style",
+    ]
+    links = [
+        "https://github.com/Vasilivi4",
+        "https://github.com/Vojdpenguin",
+        "https://github.com/NikKorYT",
+        "https://github.com/Xeljndjhtw",
+        "https://github.com/OlegKan888",
+    ]
+    # Создаем список с URL изображений и их описаниями
+    image_data = []
+
+    for i, image in enumerate(image_files):
+        try:
+            # Проверяем, есть ли необходимость загружать
+            if image.startswith("https://res.cloudinary.com"):
+                print(f"Пропускаем загрузку: {image}")
+                image_data.append(
+                    {"url": image, "description": descriptions[i], "link": links[i]}
+                )
+            else:
+                result = upload(image, folder="images", resource_type="image")
+                image_url = result["secure_url"]
+                image_data.append(
+                    {"url": image_url, "description": descriptions[i], "link": links[i]}
+                )
+        except Exception as e:
+            print(f"Ошибка при обработке {image}: {e}")
+
+    print(f"Загруженные данные: {image_data}")
+    return image_data
