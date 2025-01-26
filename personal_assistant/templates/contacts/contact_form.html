@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1 class="text-center mb-4">{{ form.instance.pk|default:"Create New Contact" }}</h1>
+    <div class="text-center mt-3">
+        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-primary">Back to Home</a>
+    </div>
 <div class="container mt-5">
-    <h1 class="text-center">{{ form.instance.pk|default:"Create New Contact" }}</h1>
+
 
     <form method="POST" class="tx mt-4">
         {% csrf_token %}
@@ -10,7 +14,7 @@
             {{ form.as_p }}
         </div>
         <button type="submit" class="btn btn-success">Save</button>
-        <a href="{% url 'contacts:contacts' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}
