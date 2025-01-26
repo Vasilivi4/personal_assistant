@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ action }} Note</h2>
-<form method="POST" class="notes">
+<h1 class="text-center mb-4">{{ action }} Note</h1>
+<div class="text-center mt-3">
+    <a href="{% url 'notes:note_list' %}" class="btn btn-primary mt-2 m-5">Back to
+        Home</a>
+</div>
+<form method="POST" class="notes p-5">
     {% csrf_token %}
     <div class="mb-3">{{ form.title.label_tag }} {{ form.title }}</div>
     <div class="mb-3">{{ form.content.label_tag }} {{ form.content }}</div>
@@ -11,7 +15,6 @@
         <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="showTagForm()">Add New Tag</button>
     </div>
     
-    <!-- Hidden Tag Form -->
     <div id="tagFormSection" class="notes mb-3" style="display: none;">
         <div class="card p-3">
             <h5>Create New Tag</h5>
