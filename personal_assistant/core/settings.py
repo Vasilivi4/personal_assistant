@@ -36,6 +36,8 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
+    "uneven-halibut-personal-assistant-e196ba93.koyeb.app",
+    "*",
 ]
 
 # Application definition
@@ -98,9 +100,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 #     }
 # }
 
-CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
+CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # DATABASES = {
 #     "default": {
@@ -113,18 +115,18 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 #     }
 # }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'koyebdb',
-        'USER': 'koyeb-adm',
-        'PASSWORD': 'npg_SYOyutw1KHV5',
-        'HOST': 'ep-proud-frost-a2eh3nq1.eu-central-1.pg.koyeb.app',
-        'OPTIONS': {'sslmode': 'require'},
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "koyebdb",
+        "USER": "koyeb-adm",
+        "PASSWORD": "npg_SYOyutw1KHV5",
+        "HOST": "ep-proud-frost-a2eh3nq1.eu-central-1.pg.koyeb.app",
+        "OPTIONS": {"sslmode": "require"},
     }
 }
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("MAIL_SERVER")
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
