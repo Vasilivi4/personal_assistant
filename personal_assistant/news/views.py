@@ -158,10 +158,12 @@ def index(request):
     weather_data = weather_api.get_current_weather(city)
 
     context = {
-        "city": city,
-        "weather_data": weather_data,
+        'city': city,
+        'weather_data': weather_data,
     }
+
     return render(request, "index.html", context)
+
 
 
 def fetch_news(self, category=None):

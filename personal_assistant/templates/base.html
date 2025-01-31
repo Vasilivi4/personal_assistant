@@ -83,7 +83,9 @@
         <div class="titul text-center">
             <img src="{% static 'images/assistant.png' %}">
         </div>
-
+        {% for post in posts %}
+        <a href="{% url 'comments:comment_list' post.id %}">View Comments</a>
+        {% endfor %}
         <main>
             <div>
                 {% block content %} {% endblock %}

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "accounts",
     "contacts",
     "files",
+    'comments',
 ]
 
 MIDDLEWARE = [
