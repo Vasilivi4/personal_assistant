@@ -98,8 +98,8 @@ CLOUDINARY_URL=cloudinary://<your_api_key>:<your_api_secret>@name
 
 ## Deployment
 
-To deploy the application to Heroku, Render or any other platform, follow the official instructions of the chosen hosting.
-https://prominent-debora-personal-assistant-c261ddb2.koyeb.app/
+- To deploy the application to Heroku, Render or any other platform, follow the official instructions of the chosen hosting.
+- https://prominent-debora-personal-assistant-c261ddb2.koyeb.app/
 
 ## Notes
 - Use comments and docstrings only where absolutely necessary.
