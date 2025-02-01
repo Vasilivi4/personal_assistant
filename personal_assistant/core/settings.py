@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "accounts",
     "contacts",
     "files",
+    "comments",
 ]
 
 MIDDLEWARE = [
@@ -90,13 +91,13 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': '567234',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "postgres",
+#         "USER": "postgres",
+#         "PASSWORD": "567234",
+#         "HOST": "localhost",
+#         "PORT": "5432",
 #     }
 # }
 
@@ -189,6 +190,6 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://prominent-debora-personal-assistant-c261ddb2.koyeb.app',
-    'https://uneven-halibut-personal-assistant-e196ba93.koyeb.app',  # если этот домен также используется
+    "https://prominent-debora-personal-assistant-c261ddb2.koyeb.app",
+    "https://uneven-halibut-personal-assistant-e196ba93.koyeb.app",  # если этот домен также используется
 ]
