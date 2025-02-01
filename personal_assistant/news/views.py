@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
 from newsapi import NewsApiClient
+from comments.models import Post
 from news.models import News
 from news.services import NewsService
 from news.weather_service import WeatherAPI
@@ -152,16 +153,16 @@ def terms_and_conditions(request):
 
 
 def index(request):
-    """Function index printing python version."""
+    posts = Post.objects.all()  # Получаем все посты
     city = "Kyiv"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
     context = {
-        'city': city,
-        'weather_data': weather_data,
+        "posts": posts,  # Добавлено posts
+        "city": city,
+        "weather_data": weather_data,
     }
-
     return render(request, "index.html", context)
 
 
