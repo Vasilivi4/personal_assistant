@@ -40,3 +40,10 @@ class News(models.Model):
         """__str__ returns <type 'str'>"""
         self.title = self.title
         return self.title
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
