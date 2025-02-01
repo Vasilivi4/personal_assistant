@@ -115,7 +115,7 @@ def upload_images_to_cloudinary():
     image_files = [
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/a8au0jinkf1tmnwoughg.png",
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/ossins6otaiu5nlrduzd.png",
-        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/zb8zrjp1wxwnwwvqyy3h.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404076/images/udb11ue7ytxwccrxq6mm.png",
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316108/images/jkstojuthylfgymubk03.png",
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/fgggjae2gyozqegdt61i.png",
     ]
