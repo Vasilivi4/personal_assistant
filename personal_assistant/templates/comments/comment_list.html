@@ -13,9 +13,9 @@
     <h2 class="text-center">Comments:</h2>
     <ul class="comment p-3">
         <b class="post mb-5">{{ post.content }}</b>
-        <div class="comment-list p-3">
+        <div class="comment-list m-5 p-3">
             {% for comment in comments %}
-            <li>{{ comment.text }} ({{ comment.created_at }})</li>
+            <li class="m-4">{{ comment.text }} ({{ comment.created_at }})</li>
             {% empty %}
             <li>No comments yet.</li>
             {% endfor %}
