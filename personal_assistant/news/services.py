@@ -113,11 +113,11 @@ def news_list_view(request):
 
 def upload_images_to_cloudinary():
     image_files = [
-        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/a8au0jinkf1tmnwoughg.png",
-        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/ossins6otaiu5nlrduzd.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404075/images/ftopxylji1twl9o4kfmh.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404076/images/nwmmcd1xfsokpk1brhdl.png",
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404076/images/udb11ue7ytxwccrxq6mm.png",
-        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316108/images/jkstojuthylfgymubk03.png",
-        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737316109/images/fgggjae2gyozqegdt61i.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404077/images/k6ofawgnhty1mdsxusf7.png",
+        "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404078/images/orabb09asjwykxqftade.png",
     ]
     descriptions = [
         "Александр Шевелёв Tim Новини та погода и style.",
