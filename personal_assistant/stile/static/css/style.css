@@ -161,3 +161,15 @@ footer {
     font-family: Arial, sans-serif;
     color: #333;
 }
+
+.comment {
+    background: rgba(156, 232, 151, 0.468);
+}
+
+.post {
+    background: rgb(232, 188, 151);
+}
+
+.comment-list {
+    background: rgba(243, 243, 242, 0.584);
+}
