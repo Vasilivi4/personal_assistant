@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center mb-4">{{ post.title }}</h1>
+
+<div class="text-center mt-3">
+    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to Home</a>
+</div>
+
+<div class="container mb-4 mt-3 p-5">
+
+    <h2 class="text-center">Comments:</h2>
+    <ul class="comment p-3">
+        <b class="post mb-5">{{ post.content }}</b>
+        <div class="comment-list">
+            {% for comment in comments %}
+            <li>{{ comment.text }} ({{ comment.created_at }})</li>
+            {% empty %}
+            <li>No comments yet.</li>
+            {% endfor %}
+        </div>
+    </ul>
+
+    <h3>Add a Comment:</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+    </form>
+</div>
+
+{% endblock %}
