@@ -19,7 +19,7 @@ from django.urls import path, include
 from news import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
     path("notes/", include("notes.urls")),
     path('', include('news.urls')),
     path('contact/', views.contact_us, name='contact_us'),
