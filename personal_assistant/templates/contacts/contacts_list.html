@@ -3,10 +3,10 @@
 {% block content %}
 <h1 class="text-center mb-4">Contact list</h1>
 <div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to Home</a>
+    <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Back to Home</a>
 </div>
 <div class="con ps-5 m-5">
-    <a href="{% url 'contacts:contact_create' %}" class="btn btn-warning btn-sm">Add contact</a>
+    <a href="{% url 'contacts:contact_create' %}" class="btn btn-warning btn-sm" style="max-width: 150px;">Add contact</a>
 
     <h2>Contacts with upcoming birthdays</h2>
     <ul>
@@ -29,8 +29,8 @@
         <li>
             {{ contact.name }} - {{ contact.phone }} - {{ contact.email }}
             <div>
-                <a href="{% url 'contacts:contact_edit' contact.pk %}" class="btn btn-warning btn-sm">Edit</a>
-                <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'contacts:contact_edit' contact.pk %}" class="btn btn-warning btn-sm" style="max-width: 150px;">Edit</a>
+                <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-sm" style="max-width: 150px;">Delete</a>
             </div>
         </li>
         {% empty %}
