@@ -154,6 +154,12 @@ footer {
     text-align: center;
 }
 
+footer img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 .CT {
     color: #000000;
 }
@@ -209,6 +215,116 @@ footer {
 .navbar-nav-1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 20px; /* Отступы между кнопками */
+    gap: 20px;
     width: 100%;
+}
+
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portfolio-item {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.portfolio-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.container-1 {
+    max-width: fit-content; /* Ширина по содержимому */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 0.3rem solid #000000;
+    background-color: #797b3caa;
+}
+
+.comment-1 .navbar-nav-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.comment-1 .btn {
+    width: auto; /* Чтобы кнопки не становились слишком широкими */
+}
+
+
+/* Десктоп */
+@media screen and (min-width: 1024px) {
+    .container-1 {
+        max-width: 300px;
+    }
+}
+
+/* Планшеты */
+@media screen and (max-width: 1024px) {
+    .container-1 {
+        max-width: 80%;
+    }
+}
+
+/* Смартфоны */
+@media screen and (max-width: 600px) {
+    .container-1 {
+        max-width: 95%;
+        font-size: 14px; /* Уменьшаем шрифт */
+    }
+}
+
+@media (max-width: 768px) {
+    .container-1 {
+        max-width: 95%; /* Чуть больше пространства */
+    }
+
+    .register ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Меню становится вертикальным */
+        align-items: center;
+    }
+
+    .nav-item {
+        width: 100%; /* Кнопки на всю ширину */
+        text-align: center;
+    }
+
+    .comment-1 {
+        text-align: center;
+    }
+}
+
+
+.navbar-nav {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет кнопкам переноситься */
+    justify-content: center; /* Выравнивание по центру */
+}
+
+.nav-item {
+    margin: 5px; /* Добавляем отступы между кнопками */
+}
+
+.btn-primary {
+    width: 100%; /* Растягиваем кнопки на маленьких экранах */
+}
+
+.titul img {
+    max-width: 100%;
+    height: auto;
 }
