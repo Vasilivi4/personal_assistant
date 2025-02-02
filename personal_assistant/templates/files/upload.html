@@ -2,15 +2,15 @@
 {% block content %}
     <h1 class="mb-4 text-center">File Upload</h1>
     <div class="text-center mt-3">
-        <a href="{% url 'files:file_list' %}" class="btn btn-primary mt-3 m-4">Back to file list</a>
+        <a href="{% url 'files:file_list' %}" class="btn btn-primary mt-3 m-4" style="max-width: 150px;">Back to file list</a>
     </div>
 <div class="container mt-5 p-5">
 
     <form method="post" enctype="multipart/form-data" class="bg p-4 rounded shadow-sm">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Upload</button>
-        <a href="{% url 'files:file_list' %}" class="btn btn-secondary ms-3">Back to file list</a>
+        <button type="submit" class="btn btn-success" style="max-width: 150px;">Upload</button>
+        <a href="{% url 'files:file_list' %}" class="btn btn-secondary ms-3" style="max-width: 150px;">Back to file list</a>
     </form>
 </div>
 {% endblock %}
