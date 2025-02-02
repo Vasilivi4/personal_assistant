@@ -1,4 +1,4 @@
-"""Module providing a function printing python version."""
+"""This module registers the Note and Tag models with the Django admin site."""
 
 from django.contrib import admin
 from notes.models import Note, Tag
