@@ -175,7 +175,7 @@ footer img {
 }
 
 .post {
-    background: rgb(232, 188, 151);
+    background: rgba(232, 188, 151, 0.59);
 }
 
 .comment-list {
