@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "contacts",
     "files",
     "comments",
+    "portfolio",
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Testing connection to the database
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
@@ -105,6 +106,7 @@ CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
+# DATABASES ON POSTGRES
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
@@ -115,6 +117,8 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 #         "PORT": os.getenv("POSTGRES_PORT"),
 #     }
 # }
+#-------------------------------------------------------------#
+# DATABASES ON KOYEB
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
