@@ -1,12 +1,15 @@
-"""Module providing a function printing python version."""
+"""Admin module for the news app."""
+
+# Django modules
 
 from django.contrib import admin
-from comments.models import Post  # Импорт модели Post
+from comments.models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'created_at']
+    """Class PostAdmin."""
+
+    list_display = ["title", "content", "created_at"]
 
 
 admin.site.register(Post, PostAdmin)
-
