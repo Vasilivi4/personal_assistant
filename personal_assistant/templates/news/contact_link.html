@@ -4,14 +4,13 @@
 <h1 class="text-center mb-4">Contact
     Us</h1>
 <div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to
+    <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Back to
         Home</a>
 </div>
 <div>
     {% if image_data %}
     {% for image in image_data %}
     <div class="ps-5 mb-4 d-flex align-items-center">
-        <!-- Изображение -->
         <img src="{{ image.url }}" alt="Image"
             style="width:200px; margin-right: 20px;">
 
