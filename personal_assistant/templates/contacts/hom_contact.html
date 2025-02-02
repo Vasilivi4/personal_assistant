@@ -12,7 +12,7 @@
             <div class="form-group flex-grow-1 me-2">
                 {{ form.as_p }}
             </div>
-            <button type="submit" class="btn btn-success">Search</button>
+            <button type="submit" class="btn btn-success" style="max-width: 150px;">Search</button>
         </form>
 
         <hr>
@@ -48,9 +48,9 @@
                     </span>
                     <div>
                         <a href="{% url 'contacts:contact_edit' contact.pk %}"
-                            class="btn btn-warning btn-sm">Edit</a>
+                            class="btn btn-warning btn-sm" style="max-width: 150px;">Edit</a>
                         <a href="{% url 'contacts:contact_delete' contact.pk %}"
-                            class="btn btn-danger btn-sm">Delete</a>
+                            class="btn btn-danger btn-sm" style="max-width: 150px;">Delete</a>
                     </div>
                 </li>
                 {% endfor %}
@@ -62,11 +62,11 @@
 
         <div class="mt-4">
             <a href="{% url 'contacts:contact_create' %}"
-                class="btn btn-success">Add New Contact</a>
+                class="btn btn-success" style="max-width: 150px;">Add New Contact</a>
         </div>
 
         <div class="text-center mt-4">
-            <a href="{% url 'news:index' %}" class="btn btn-primary">Go to
+            <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Go to
                 Homepage</a>
         </div>
     </div>
@@ -74,7 +74,7 @@
     <div>
         <p>You are not logged in. Please log in to access this page.</p>
         <a href="{% url 'accounts:login' %}"
-            class="btn btn-primary mt-3">Login</a>
+            class="btn btn-primary mt-3" style="max-width: 150px;">Login</a>
     </div>
 </div>
 {% endif %}
