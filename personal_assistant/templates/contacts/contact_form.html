@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="text-center mb-4">{{ form.instance.pk|default:"Create New Contact" }}</h1>
     <div class="text-center mt-3">
-        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-primary">Back to Home</a>
+        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-primary" style="max-width: 150px;">Back to Home</a>
     </div>
 <div class="container mt-5">
 
@@ -14,7 +14,7 @@
             {{ form.as_p }}
         </div>
         <button type="submit" class="btn btn-success">Save</button>
-        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'contacts:contacts_list' %}" class="btn btn-secondary" style="max-width: 150px;">Cancel</a>
     </form>
 </div>
 {% endblock %}
