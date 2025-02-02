@@ -153,13 +153,14 @@ def terms_and_conditions(request):
 
 
 def index(request):
-    posts = Post.objects.all()  # Получаем все посты
+    """Function index printing python version."""
+    posts = Post.objects.all()
     city = "Kyiv"
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
 
     context = {
-        "posts": posts,  # Добавлено posts
+        "posts": posts,
         "city": city,
         "weather_data": weather_data,
     }
