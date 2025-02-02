@@ -3,7 +3,7 @@
 {% block content %}
 <h1 class="text-center mb-4">{{ action }} Note</h1>
 <div class="text-center mt-3">
-    <a href="{% url 'notes:note_list' %}" class="btn btn-primary mt-2 m-5">Back to
+    <a href="{% url 'notes:note_list' %}" class="btn btn-primary mt-2 m-5" style="max-width: 150px;">Back to
         Home</a>
 </div>
 <form method="POST" class="notes p-5">
@@ -12,7 +12,7 @@
     <div class="mb-3">{{ form.content.label_tag }} {{ form.content }}</div>
     <div class="mb-3">
         {{ form.tags.label_tag }} {{ form.tags }}
-        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="showTagForm()">Add New Tag</button>
+        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="showTagForm()" style="max-width: 150px;">Add New Tag</button>
     </div>
     
     <div id="tagFormSection" class="notes mb-3" style="display: none;">
@@ -21,14 +21,14 @@
             <div id="tagError" class="alert alert-danger" style="display: none;"></div>
             <div class="input-group">
                 <input type="text" id="newTagName" class="form-control" placeholder="Enter tag name">
-                <button type="button" class="btn btn-success" onclick="createTag()">Add Tag</button>
-                <button type="button" class="btn btn-secondary" onclick="hideTagForm()">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="createTag()" style="max-width: 150px;">Add Tag</button>
+                <button type="button" class="btn btn-secondary" onclick="hideTagForm()" style="max-width: 150px;">Cancel</button>
             </div>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary" style="max-width: 150px;">Save</button>
+    <a href="{% url 'notes:note_list' %}" class="btn btn-secondary" style="max-width: 150px;">Cancel</a>
 </form>
 
 <script>
