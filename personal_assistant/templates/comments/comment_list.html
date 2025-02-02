@@ -5,7 +5,7 @@
 <h1 class="text-center mb-4">{{ post.title }}</h1>
 
 <div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to Home</a>
+    <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Back to Home</a>
 </div>
 
 <div class="container mb-4 mt-3 p-5">
@@ -29,7 +29,7 @@
         <div class="form-group">
             {{ form.as_p }}
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+        <button type="submit" class="btn btn-primary mt-2" style="max-width: 150px;">Post Comment</button>
     </form>
 </div>
 
