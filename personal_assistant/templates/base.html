@@ -75,15 +75,6 @@
                                         class="btn btn-primary">Contacts</button>
                                 </a>
                             </li>
-                            {% for post in posts %}
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{% url 'comments:comment_list' post.id %}">
-                                    <button
-                                        class="btn btn-primary">Comments >{{ post.title }}<</button>
-                                </a>
-                            </li>
-                            {% endfor %}
                             <li class="nav-item">
                                 <a class="nav-link"
                                     href="https://edu.goit.global/ru/referral?x=eyJlbWFpbCI6ImxhNjUzOTA5QGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ItCe0LvQtdC60YHQsNC90LTRgCIsImxvY2FsZSI6InVrIiwibGFuZ3VhZ2UiOiJydSIsInRvdGFsSG91cnMiOjI3MCwiY3VycmVudE9yTGFzdFRlY2hub2xvZ3kiOiJDYXJlZXJTZXJ2aWNlIiwicGFzc2VkSG9tZXdvcmtzQ291bnQiOjY3fQ=="
@@ -98,6 +89,21 @@
         <div class="titul text-center">
             <img src="{% static 'images/assistant.png' %}">
         </div>
+        <div class="comment-1">
+            <div class="navbar navbar-expand-lg navbar-ligh post">
+                {% for post in posts|slice:":5" %}
+                <lu class="nav-item ps-5 navbar-nav-1">
+                    <a class="nav-link">
+                        <button class="btn btn-primary">Comment {{ post.title }}</button></a>
+                    <div class="dropdown-menu">
+                        <a
+                            href="{% url 'comments:comment_list' post.id %}"
+                            class="dropdown-item">{{ post.title }}</a>
+                    </div>
+                </lu>
+                {% endfor %}
+            </div>
+        </div>      
         <main>
             <div>
                 {% block content %} {% endblock %}
