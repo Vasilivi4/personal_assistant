@@ -5,11 +5,11 @@
     {% if user.is_authenticated %}
         <h1 class="text-center mb-2">File List</h1>
             <div class="text-center mt-3">
-                <a href="{% url 'news:index' %}" class="btn btn-primary">Back to
+                <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Back to
                     Home</a>
             </div>
         <div class="d-flex justify-content-between align-items-center mb-3 p-5">
-            <a href="{% url 'files:file_upload' %}" class="btn btn-primary">Upload a New File</a>
+            <a href="{% url 'files:file_upload' %}" class="btn btn-primary" style="max-width: 150px;">Upload a New File</a>
             <form method="get" class="form-inline">
                 <select name="category" class="form-select me-2">
                     <option value="">All Categories</option>
@@ -18,7 +18,7 @@
                     <option value="video" {% if request.GET.category == "video" %}selected{% endif %}>Videos</option>
                     <option value="other" {% if request.GET.category == "other" %}selected{% endif %}>Other</option>
                 </select>
-                <button type="submit" class="btn btn-secondary">Filter</button>
+                <button type="submit" class="btn btn-secondary" style="max-width: 150px;">Filter</button>
             </form>
         </div>
 <div class="p-5">
@@ -29,7 +29,7 @@
                         <span>
                             <strong>{{ file.name }}</strong> ({{ file.get_category_display }})
                         </span>
-                        <a href="{{ file.file.url }}" target="_blank" class="btn btn-outline-primary btn-sm">Download</a>
+                        <a href="{{ file.file.url }}" target="_blank" class="btn btn-outline-primary btn-sm" style="max-width: 150px;">Download</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -41,7 +41,7 @@
     {% else %}
         <div class="alert alert-warning mt-4">
             <p>You are not logged in. Please log in to access this page.</p>
-            <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+            <a href="{% url 'accounts:login' %}" class="btn btn-primary" style="max-width: 150px;">Login</a>
         </div>
     {% endif %}
 </div>
