@@ -4,7 +4,7 @@
 {% if user.is_authenticated %}
 <h1 class="text-center mb-4">Notes list</h1>
 <div class="text-center mt-3">
-    <a href="{% url 'news:index' %}" class="btn btn-primary">Back to
+    <a href="{% url 'news:index' %}" class="btn btn-primary" style="max-width: 150px;">Back to
         Home</a>
 </div>
 <div class="row p-5">
@@ -13,10 +13,10 @@
             <div class="card-header">Tags</div>
             <div class="card-body">
                 <a href="{% url 'notes:note_list' %}"
-                    class="btn btn-sm {% if not selected_tag %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2">All</a>
+                    class="btn btn-sm {% if not selected_tag %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2" style="max-width: 150px;">All</a>
                 {% for tag in tags %}
                 <a href="{% url 'notes:note_list' %}?tag={{ tag.id }}"
-                    class="btn btn-sm {% if selected_tag == tag.id|stringformat:'s' %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2">
+                    class="btn btn-sm {% if selected_tag == tag.id|stringformat:'s' %}btn-primary{% else %}btn-outline-primary{% endif %} mb-2" style="max-width: 150px;">
                     {{ tag.name }}
                 </a>
                 {% endfor %}
@@ -30,13 +30,13 @@
                 <input type="text" name="q" class="form-control"
                     placeholder="Search notes..."
                     value="{{ query|default:'' }}">
-                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit" style="max-width: 150px;">Search</button>
             </div>
         </form>
 
         <div class="d-flex justify-content-between mb-3">
             <h1>My Notes</h1>
-            <a href="{% url 'notes:note_create' %}" class="btn btn-primary">New
+            <a href="{% url 'notes:note_create' %}" class="btn btn-primary" style="max-width: 150px;">New
                 Note</a>
         </div>
 
@@ -53,15 +53,15 @@
                     </div>
                     <div class="btn-group">
                         <a href="{% url 'notes:note_edit' note.pk %}"
-                            class="btn btn-sm btn-outline-primary">Edit</a>
+                            class="btn btn-sm btn-outline-primary" style="max-width: 150px;">Edit</a>
                         <a href="{% url 'notes:note_delete' note.pk %}"
-                            class="btn btn-sm btn-outline-danger">Delete</a>
+                            class="btn btn-sm btn-outline-danger" style="max-width: 150px;">Delete</a>
                         <form method="POST"
                             action="{% url 'notes:note_toggle_done' note.pk %}"
                             style="display: inline;">
                             {% csrf_token %}
                             <button type="submit"
-                                class="btn btn-sm btn-outline-success">
+                                class="btn btn-sm btn-outline-success" style="max-width: 150px;">
                                 {% if note.done %}Mark Undone{% else %}Mark
                                 Done{% endif %}
                             </button>
@@ -78,7 +78,7 @@
 {% else %}
 <div>
     <p>You are not authenticated. Please log in to access this page.</p>
-    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3">Log In</a>
+    <a href="{% url 'accounts:login' %}" class="btn btn-primary mt-3" style="max-width: 150px;">Log In</a>
 </div>
 {% endif %}
 {% endblock %}
