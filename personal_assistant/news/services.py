@@ -1,6 +1,9 @@
-"""Module providing a function printing python version."""
+"""Module services.py."""
+
+# Version: 2021.10.17
 
 import logging
+import cloudinary
 import requests
 from django.shortcuts import render
 from django import forms
@@ -60,7 +63,7 @@ class NewsService:
             params["to"] = to_date
 
         try:
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()
             articles = response.json().get("articles", [])
 
@@ -74,7 +77,7 @@ class NewsService:
 
             return articles
         except requests.exceptions.RequestException as e:
-            self.logger.error(f"Error fetching news: {e}")
+            self.logger.error("Error fetching news: %s", e)
             return []
 
     def fetch_sources(self):
@@ -83,11 +86,11 @@ class NewsService:
         params = {"apiKey": self.api_key}
 
         try:
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()
             return response.json().get("sources", [])
         except requests.exceptions.RequestException as e:
-            self.logger.error(f"Error fetching sources: {e}")
+            self.logger.error("Error fetching sources: %s", e)
             return [
                 {"name": "Source 1", "description": "Description 1"},
                 {"name": "Source 2", "description": "Description 2"},
@@ -112,6 +115,7 @@ def news_list_view(request):
 
 
 def upload_images_to_cloudinary():
+    """Function upload_images_to_cloudinary printing python version."""
     image_files = [
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404075/images/ftopxylji1twl9o4kfmh.png",
         "https://res.cloudinary.com/dxcgfa3e2/image/upload/v1737404076/images/nwmmcd1xfsokpk1brhdl.png",
@@ -160,8 +164,8 @@ def upload_images_to_cloudinary():
                 image_data.append(
                     {"url": image_url, "description": descriptions[i], "link": links[i]}
                 )
-        except Exception as e:
-            print(f"Ошибка при обработке {image}: {e}")
+        except (requests.exceptions.RequestException, cloudinary.exceptions.Error) as e:
+            print(f"Processing error {image}: {e}")
 
-    print(f"Загруженные данные: {image_data}")
+    print(f"Downloaded data: {image_data}")
     return image_data
