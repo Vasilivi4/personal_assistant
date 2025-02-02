@@ -1,17 +1,25 @@
-"""Module providing a function printing python version."""
+"""Module notes views."""
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from notes.models import Note, Tag
 from django.http import JsonResponse
-from notes.forms import NoteForm
 from django.contrib.auth.decorators import login_required
+from notes.models import Note, Tag
+from notes.forms import NoteForm
 
 
 def note_list(request):
     """Function note_list printing python version."""
-    notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+    notes = (
+        Note.objects.filter(user=request.user).all()
+        if request.user.is_authenticated
+        else []
+    )
+    tags = (
+        Tag.objects.filter(user=request.user).all()
+        if request.user.is_authenticated
+        else []
+    )
     query = request.GET.get("q")
     if query:
         notes = notes.filter(Q(title__icontains=query) | Q(content__icontains=query))
@@ -56,6 +64,7 @@ def note_edit(request, pk):
         request, "notes/note_form.html", {"form": form, "note": note, "action": "Edit"}
     )
 
+
 @login_required
 def note_delete(request, pk):
     """Function note_delete printing python version."""
@@ -65,17 +74,23 @@ def note_delete(request, pk):
         return redirect("notes:note_list")
     return render(request, "notes/note_confirm_delete.html", {"note": note})
 
+
 @login_required
 def note_toggle_done(request, pk):
     """Function note_toggle_done printing python version."""
-    note = get_object_or_404(Note, pk=pk)
+    note = get_object_or_404(Note, pk=pk, user=request.user)
     note.done = not note.done
     note.save()
     return redirect("notes:note_list")
 
+
 def tag_list(request):
     """Function tag_list printing python version."""
-    tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+    tags = (
+        Tag.objects.filter(user=request.user).all()
+        if request.user.is_authenticated
+        else []
+    )
     return render(request, "notes/tag_list.html", {"tags": tags})
 
 
