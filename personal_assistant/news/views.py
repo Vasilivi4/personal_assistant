@@ -1,4 +1,6 @@
-"""Module providing a function printing python version."""
+"""Views for the news app."""
+
+# Description: This file contains the views for the news app.
 
 import os
 import requests
@@ -6,7 +8,7 @@ from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
 from newsapi import NewsApiClient
-from comments.models import Post
+from news.models import Post
 from news.models import News
 from news.services import NewsService
 from news.weather_service import WeatherAPI
@@ -109,7 +111,7 @@ def news_view(request):
 
 
 def weather_widget_view(request):
-    """Function weather_widget_view."""
+    """Function weather_widget_view printing python version."""
     city = request.GET.get("city", "Kyiv")
     weather_api = WeatherAPI(settings.WEATHER_API_KEY)
     weather_data = weather_api.get_current_weather(city)
@@ -124,7 +126,7 @@ def weather_widget_view(request):
 def fetch_rates(self):
     """Function fetch_rates printing python version."""
     try:
-        response = requests.get(self.api_url)
+        response = requests.get(self.api_url, timeout=10)
         response.raise_for_status()
         data = response.json()
 
@@ -167,8 +169,7 @@ def index(request):
     return render(request, "index.html", context)
 
 
-
-def fetch_news(self, category=None):
+def fetch_news(category=None):
     """Function fetch_news printing python version."""
     try:
         response = newsapi.get_top_headlines(
@@ -177,11 +178,12 @@ def fetch_news(self, category=None):
             country="us",
         )
         return response.get("articles", [])
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         return {"error": str(e)}
 
 
 def photo_gallery(request):
+    """Function photo_gallery printing python version."""
     image_data = upload_images_to_cloudinary()
 
     return render(request, "news/contact_link.html", {"image_data": image_data})
