@@ -1,3 +1,3 @@
-"""Module providing a function printing python version."""
+"""This module contains the admin configuration for the files app."""
 
 from django.contrib import admin
