@@ -1,8 +1,11 @@
+"""This module contains the views for the comments app."""
+
 from django.shortcuts import render, get_object_or_404, redirect
 from comments.forms import CommentForm
 from news.models import Post
 
 def comment_list(request, post_id):
+    """Function comment_list printing python version."""
     post = get_object_or_404(Post, id=post_id)
     comments = post.comments.all()
 
