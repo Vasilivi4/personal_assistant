@@ -1,4 +1,4 @@
-"""Module providing a function printing python version."""
+"""URLs for the notes app."""
 
 from django.urls import path
 from notes import views
