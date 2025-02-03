@@ -16,23 +16,30 @@
             href="{% static 'css/weather.css' %}">
     </head>
     <body class="p-1">
-        <div class="container-1">
-            <div class="register">
-                {% if user.is_authenticated %}
-                <ul class="ull">
-                    
-                    <li>Welcome <b class="user">{{ user.username }}!</b></li>
-                    <li><a href="{% url 'accounts:logout' %}"
-                            role="button">Logout</a></li>
-                </ul>
-                {% else %}
-                <ul>
-                    <li><a href="{% url 'accounts:signup' %}" role="button">Sign
-                            Up</a></li>
-                    <li><a href="{% url 'accounts:login' %}"
-                            role="button">Login</a></li>
-                </ul>
-                {% endif %}
+        <div class="version-info">
+            <div class="container-1 text-center">
+                <h5 class="text-primary">Personal Assistant - Beta Version</h5>
+                <p>Current Version: <strong>v0.9.3</strong></p>
+                <!--<p>Demo available until: <strong>March 31, 2025</strong></p>-->
+                <pre class="text-muted">This is a preliminary version. Some features may not be fully working capable and non-functional. This is being worked on by.</pre>
+                <p class="text-muted">>Byte-Force<</p>
+            </div>
+    </div>
+        <div class="version-info-1">
+            <div class="container-1">
+                <div class="register">
+                    {% if user.is_authenticated %}
+                    <ul class="ull">
+                        <li>Welcome <b class="user">{{ user.username }}!</b></li>
+                        <li><a href="{% url 'accounts:logout' %}" role="button">Logout</a></li>
+                    </ul>
+                    {% else %}
+                    <ul>
+                        <li><a href="{% url 'accounts:signup' %}" role="button">Sign Up</a></li>
+                        <li><a href="{% url 'accounts:login' %}" role="button">Login</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="p-4">
