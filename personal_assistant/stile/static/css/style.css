@@ -241,12 +241,13 @@ footer img {
 }
 
 .container-1 {
-    max-width: fit-content; /* Ширина по содержимому */
+    max-width: fit-content;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     border: 0.3rem solid #000000;
     background-color: #797b3caa;
+    border-radius: 8px;
 }
 
 .comment-1 .navbar-nav-1 {
@@ -256,35 +257,32 @@ footer img {
 }
 
 .comment-1 .btn {
-    width: auto; /* Чтобы кнопки не становились слишком широкими */
+    width: auto;
 }
 
 
-/* Десктоп */
 @media screen and (min-width: 1024px) {
     .container-1 {
         max-width: 300px;
     }
 }
 
-/* Планшеты */
 @media screen and (max-width: 1024px) {
     .container-1 {
         max-width: 80%;
     }
 }
 
-/* Смартфоны */
 @media screen and (max-width: 600px) {
     .container-1 {
         max-width: 95%;
-        font-size: 14px; /* Уменьшаем шрифт */
+        font-size: 14px;
     }
 }
 
 @media (max-width: 768px) {
     .container-1 {
-        max-width: 95%; /* Чуть больше пространства */
+        max-width: 95%;
     }
 
     .register ul {
@@ -295,12 +293,12 @@ footer img {
     }
 
     .navbar-nav {
-        flex-direction: column; /* Меню становится вертикальным */
+        flex-direction: column;
         align-items: center;
     }
 
     .nav-item {
-        width: 100%; /* Кнопки на всю ширину */
+        width: 100%;
         text-align: center;
     }
 
@@ -312,19 +310,40 @@ footer img {
 
 .navbar-nav {
     display: flex;
-    flex-wrap: wrap; /* Позволяет кнопкам переноситься */
-    justify-content: center; /* Выравнивание по центру */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .nav-item {
-    margin: 5px; /* Добавляем отступы между кнопками */
+    margin: 5px;
 }
 
 .btn-primary {
-    width: 100%; /* Растягиваем кнопки на маленьких экранах */
+    width: 100%;
 }
 
 .titul img {
     max-width: 100%;
     height: auto;
+}
+
+.version-info {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 3px solid #000000;
+    border-radius: 8px;
+    padding: 5px 5px;
+    font-size: 18px;
+}
+
+.version-info-1 {
+    max-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.8);
+    border: 3px solid #000000;
+    border-radius: 8px;
+    padding: 5px 5px;
 }
