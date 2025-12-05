@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
     "uneven-halibut-personal-assistant-e196ba93.koyeb.app",
+    "fuzzy-aleta-personal-assistant-a4f9853b.koyeb.app",
     "*",
 ]
 
@@ -195,5 +196,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSRF_TRUSTED_ORIGINS = [
     "https://prominent-debora-personal-assistant-c261ddb2.koyeb.app",
-    "https://uneven-halibut-personal-assistant-e196ba93.koyeb.app",  # если этот домен также используется
+    "https://uneven-halibut-personal-assistant-e196ba93.koyeb.app",  # если этот домен также используетс
+    "https://fuzzy-aleta-personal-assistant-a4f9853b.koyeb.app",
 ]
