@@ -117,7 +117,7 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 #         "PORT": os.getenv("POSTGRES_PORT"),
 #     }
 # }
-#-------------------------------------------------------------#
+# -------------------------------------------------------------#
 # DATABASES ON KOYEB
 DATABASES = {
     "default": {
