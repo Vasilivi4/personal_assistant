@@ -36,8 +36,6 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
-    "uneven-halibut-personal-assistant-e196ba93.koyeb.app",
-    "fuzzy-aleta-personal-assistant-a4f9853b.koyeb.app",
     "*",
 ]
 
