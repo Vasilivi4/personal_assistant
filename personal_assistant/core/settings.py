@@ -125,7 +125,7 @@ DATABASES = {
         "USER": "koyeb-adm",
         "PASSWORD": "npg_adMVF50jqJIh",
         "HOST": "ep-small-flower-a27ol6gg.eu-central-1.pg.koyeb.app",
-        "OPTIONS": {"sslmode": "require"},
+        "OPTIONS": {"sslmode": "require", "service": "koyebdb"},
     }
 }
 
