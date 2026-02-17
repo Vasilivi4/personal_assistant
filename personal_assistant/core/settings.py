@@ -123,10 +123,10 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "database",
-        "USER": "koyeb-adm",
-        "PASSWORD": "npg_adMVF50jqJIh",
-        "HOST": "ep-small-flower-a27ol6gg.eu-central-1.pg.koyeb.app",
+        "DATABASE_NAME": "koyebdb",
+        "DATABASE_USER": "koyeb-adm",
+        "DATABASE_PASSWORD": "npg_adMVF50jqJIh",
+        "DATABASE_HOST": "ep-small-flower-a27ol6gg.eu-central-1.pg.koyeb.app",
         "OPTIONS": {"sslmode": "require"},
     }
 }
