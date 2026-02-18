@@ -118,13 +118,25 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 # }
 # -------------------------------------------------------------#
 # DATABASES ON KOYEB
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "koyebdb",
+#         "USER": "koyeb-adm",
+#         "PASSWORD": "npg_adMVF50jqJIh",
+#         "HOST": "ep-small-flower-a27ol6gg.eu-central-1.pg.koyeb.app",
+#         "OPTIONS": {"sslmode": "require", "service": "koyebdb"},
+#     }
+# }
+# -------------------------------------------------------------#
+# DATABASES ON RENDER
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "koyebdb",
-        "USER": "koyeb-adm",
-        "PASSWORD": "npg_adMVF50jqJIh",
-        "HOST": "ep-small-flower-a27ol6gg.eu-central-1.pg.koyeb.app",
+        "NAME": "db_8b5e",
+        "USER": "db_8b5e_user",
+        "PASSWORD": "bOlb1DFELiRzGc2Z1qhUuvmytVxCutrQ",
+        "HOST": "dpg-d6ahu6gboq4c73ddnrhg-a",
         "OPTIONS": {"sslmode": "require", "service": "koyebdb"},
     }
 }
