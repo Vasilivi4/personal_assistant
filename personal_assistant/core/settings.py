@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-qkdof!7&+f(b8zvy!=am)wj1409nzp**tt##csn@l#ljpo8q2e"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -187,12 +188,18 @@ USE_TZ = True
 STATIC_URL = "/static/"  # URL для доступа к статическим файлам
 
 # Указываем дополнительные папки со статикой, если необходимо
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "stile", "static"),
+# ]
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "stile", "static"),
+    BASE_DIR / "stile" / "static",
 ]
 
 # Папка для collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Замени свою строку STATICFILES_STORAGE на эту:
+STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
