@@ -137,7 +137,7 @@ DATABASES = {
         "USER": "db_8b5e_user",
         "PASSWORD": "bOlb1DFELiRzGc2Z1qhUuvmytVxCutrQ",
         "HOST": "dpg-d6ahu6gboq4c73ddnrhg-a",
-        "OPTIONS": {"sslmode": "require", "service": "render"},
+        "OPTIONS": {"sslmode": "require"},
     }
 }
 
