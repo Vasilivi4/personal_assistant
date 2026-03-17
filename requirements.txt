@@ -8,7 +8,7 @@ cloudinary>=1.42.0,<2.0.0
 colorama==0.4.6
 coverage==7.6.10
 dill==0.3.9
-Django==5.1.15
+Django==5.2.12
 django-cloudinary-storage==0.3.0
 django-storages==1.14.4
 exceptiongroup==1.2.2
@@ -33,7 +33,7 @@ pluggy==1.5.0
 proto-plus==1.25.0
 protobuf==5.29.6
 psycopg2-binary==2.9.9
-pyasn1==0.6.2
+pyasn1==0.6.3
 pyasn1_modules==0.4.1
 pylint==3.3.3
 pytest==8.3.4
@@ -46,7 +46,7 @@ requests==2.32.4
 rsa==4.9
 six==1.17.0
 soupsieve==2.6
-sqlparse==0.5.4
+sqlparse==0.5.5
 tomli==2.2.1
 tomlkit==0.13.2
 typing_extensions==4.12.2
